@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 const slides = [
   {
     image: smartImg,
-    title: "Smart Attendance Tracking",
+    title: "Smart Attendance  Tracking",
     description: "Easily mark and manage student attendance<br>in just a few taps.",
   },
   {

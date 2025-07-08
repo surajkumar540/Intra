@@ -83,7 +83,7 @@ const Login = ({ setAuth }) => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full px-4 py-3 text-primary pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.email
+                  className={`w-full px-4 py-3 text-[#989898] pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.email
                     ? "border-red-300 focus:border-red-500"
                     : "border-gray-200 focus:border-primary"
                     }`}
