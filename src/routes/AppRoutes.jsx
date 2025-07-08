@@ -14,7 +14,7 @@ import Dashboard from "../pages/auth/Dashboard";
 import WelcomeScreen from "../pages/welcome/WelcomeScreen";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import AttendanceOverview from "../components/dashboard/AttendanceOverview";
-import InviteForm from "../components/dashboard/InviteForm";
+import InviteForm from "../components/dashboard/invite/InviteForm";
 
 const AppRoutes = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(

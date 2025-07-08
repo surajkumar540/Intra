@@ -64,7 +64,7 @@ const TimePicker = ({
   // Size configurations
   const sizeConfig = {
     small: {
-      timeButton: "text-lg px-3 py-1 ",
+      timeButton: "text-md px-3 py-1 ",
       periodButton: "px-3 py-2 text-xs",
       picker: "text-2xl",
       container: "p-6",
@@ -287,30 +287,29 @@ const TimePicker = ({
   };
 
   const TimeDisplay = ({ label, hour, minute, period, type }) => (
-    <div className="space-y-4 flex-1 relative ">
-      <div className="flex items-center gap-2">
+    <div className="space-y-4 flex-1 relative w-[100px]">
+      <div className="flex items-center">
         <h3 className="text-gray-700 font-medium text-lg">
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className=" ml-1">*</span>}
         </h3>
         {isLoading && (
           <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
         )}
       </div>
 
-      <div className="flex items-center gap-3 ">
+      <div className="flex items-center gap-1 ">
         <button
           type="button"
           onClick={() => handleTimeSelect(type)}
           disabled={disabled}
-          className={`font-semibold text-gray-800 bg-gray-50 rounded-lg border-2 border-gray-200 text-center hover:bg-gray-100 transition-colors focus:outline-none focus:border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed ${
-            currentSize.timeButton
-          } ${error ? "border-red-300" : ""}`}
+          className={`font-semibold text-gray-800 bg-gray-50 rounded-lg border-2 border-gray-200 text-center hover:bg-gray-100 transition-colors focus:outline-none focus:border-pink-400 disabled:opacity-50 disabled:cursor-not-allowed ${currentSize.timeButton
+            } ${error ? "border-red-300" : ""}`}
         >
           {formatTime(hour, minute)}
         </button>
 
-        <div className="flex rounded-lg overflow-hidden border-2 border-gray-200">
+        <div className="flex rounded-lg overflow-hidden border-2 border-gray-200 ">
           <button
             type="button"
             disabled={disabled}
@@ -323,13 +322,11 @@ const TimePicker = ({
               }
               setFormData(newFormData);
             }}
-            className={`font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-              currentSize.periodButton
-            } ${
-              period === "AM"
+            className={`font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${currentSize.periodButton
+              } ${period === "AM"
                 ? "text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+              }`}
             style={{
               backgroundColor: period === "AM" ? primaryColor : undefined,
             }}
@@ -348,13 +345,11 @@ const TimePicker = ({
               }
               setFormData(newFormData);
             }}
-            className={`font-medium transition-colors border-l border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-              currentSize.periodButton
-            } ${
-              period === "PM"
+            className={`font-medium transition-colors border-l border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed ${currentSize.periodButton
+              } ${period === "PM"
                 ? "text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+              }`}
             style={{
               backgroundColor: period === "PM" ? primaryColor : undefined,
             }}
@@ -368,9 +363,8 @@ const TimePicker = ({
 
       {showTimePicker === type && (
         <div
-          className={`absolute bottom-0 ${
-            showTimePicker === "start" ? "left-0" : "right-0"
-          } right-0 mt-2 bg-white border-2 rounded-lg shadow-xl z-20 min-w-[300px]`}
+          className={`absolute bottom-0 ${showTimePicker === "start" ? "left-0" : "right-0"
+            } right-0 mt-2 bg-white border-2 rounded-lg shadow-xl z-20 min-w-[300px]`}
         >
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="text-lg font-medium text-gray-800">
@@ -440,11 +434,10 @@ const TimePicker = ({
                   onClick={() =>
                     setTempTime((prev) => ({ ...prev, period: "AM" }))
                   }
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    tempTime.period === "AM"
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${tempTime.period === "AM"
                       ? "text-white"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor:
                       tempTime.period === "AM" ? primaryColor : undefined,
@@ -457,11 +450,10 @@ const TimePicker = ({
                   onClick={() =>
                     setTempTime((prev) => ({ ...prev, period: "PM" }))
                   }
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    tempTime.period === "PM"
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${tempTime.period === "PM"
                       ? "text-white"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor:
                       tempTime.period === "PM" ? primaryColor : undefined,
@@ -483,18 +475,17 @@ const TimePicker = ({
                       onClick={() =>
                         quickTimeSelect(time.hour, time.minute, time.period)
                       }
-                      className={`px-3 py-2 text-xs rounded-lg border transition-colors ${
-                        tempTime.hour === time.hour &&
-                        tempTime.minute === time.minute &&
-                        tempTime.period === time.period
+                      className={`px-3 py-2 text-xs rounded-lg border transition-colors ${tempTime.hour === time.hour &&
+                          tempTime.minute === time.minute &&
+                          tempTime.period === time.period
                           ? "text-white border-pink-400"
                           : "text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100"
-                      }`}
+                        }`}
                       style={{
                         backgroundColor:
                           tempTime.hour === time.hour &&
-                          tempTime.minute === time.minute &&
-                          tempTime.period === time.period
+                            tempTime.minute === time.minute &&
+                            tempTime.period === time.period
                             ? primaryColor
                             : undefined,
                       }}
@@ -535,9 +526,8 @@ const TimePicker = ({
     >
       <div className="space-y-8">
         <div
-          className={`flex gap-8 ${
-            showEndTime ? "justify-between" : "justify-start"
-          }`}
+          className={`flex gap-8 ${showEndTime ? "justify-between" : "justify-start"
+            }`}
         >
           <TimeDisplay
             label={startLabel}
