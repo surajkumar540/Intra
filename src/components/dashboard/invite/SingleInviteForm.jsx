@@ -174,7 +174,7 @@ export default function SingleInviteForm({
                     <div className="relative">
                         <div className="relative">
                             <input
-                                type="text"
+                                type="number"
                                 value={formData.studentRollNo}
                                 onChange={(e) => handleInputChange("studentRollNo", e.target.value)}
                                 onFocus={() => setShowStudentDropdown(true)}
