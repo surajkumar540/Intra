@@ -96,6 +96,19 @@ export default function InviteForm() {
     }
   };
 
+  const handleActiveTab = (tab) => {
+    setActiveTab(tab);
+    setFormData({
+      studentRollNo: "",
+      studentName: "",
+      hostName: "",
+      date: "",
+    });
+    setErrors({});
+    setShowSuccessPopup(false);
+    setShowCalendar(false);
+  }
+
   // Handle time changes from TimePicker
   const handleTimeChange = (timeData) => {
     setFormData((prev) => ({
@@ -171,25 +184,57 @@ export default function InviteForm() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.studentRollNo.trim())
-      newErrors.studentRollNo = "Student Roll No is required";
-    if (!formData.studentName.trim())
-      newErrors.studentName = "Student Name is required";
-    if (!formData.hostName.trim()) newErrors.hostName = "Host Name is required";
-    if (!formData.date.trim()) newErrors.date = "Date is required";
-    if (!formData.meetingAgenda.trim())
-      newErrors.meetingAgenda = "Meeting Agenda is required";
-    if (!formData.meetingRoom.trim())
-      newErrors.meetingRoom = "Meeting Room is required";
+    if (activeTab === "Single") {
+      if (!formData.studentRollNo?.trim())
+        newErrors.studentRollNo = "Student Roll No is required";
+      if (!formData.studentName?.trim())
+        newErrors.studentName = "Student Name is required";
+      if (!formData.hostName?.trim())
+        newErrors.hostName = "Host Name is required";
+      if (!formData.date?.trim()) newErrors.date = "Date is required";
+      if (!formData.meetingAgenda?.trim())
+        newErrors.meetingAgenda = "Meeting Agenda is required";
+      if (!formData.meetingRoom?.trim())
+        newErrors.meetingRoom = "Meeting Room is required";
+    } else if (activeTab === "PTM") {
+      // Replace with PTM-specific validations
+      if (!formData.className?.trim())
+        newErrors.className = "Class is required";
+      if (!formData.section?.trim())
+        newErrors.section = "Section is required";
+      if (!formData.teacherName?.trim())
+        newErrors.teacherName = "Teacher Name is required";
+      if (!formData.date?.trim()) newErrors.date = "Date is required";
+      if (!formData.meetingRoom?.trim())
+        newErrors.meetingRoom = "Meeting Room is required";
+      if (!formData.studentRollNo?.trim())
+        newErrors.studentRollNo = "Student Roll No is required";
+      if (!formData.studentName?.trim())
+        newErrors.studentName = "Student Name is required";
+      if (!formData.hostName?.trim())
+        newErrors.hostName = "Host Name is required";
+      if (!formData.date?.trim()) newErrors.date = "Date is required";
+      if (!formData.meetingAgenda?.trim())
+        newErrors.meetingAgenda = "Meeting Agenda is required";
+      if (!formData.meetingRoom?.trim())
+        newErrors.meetingRoom = "Meeting Room is required";
+    }
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+
   const handleCreateInvite = () => {
+    console.log("formData", formData);
     if (validateForm()) {
       setShowSuccessPopup(true);
     }
+    else {
+      console.log("errors", errors);
+    }
+
   };
 
   const formatTimeForDisplay = (timeObj) => {
@@ -313,7 +358,7 @@ Meeting Management System`;
           {/* Tab Selection */}
           <div className="flex justify-center gap-2 mt-2">
             <button
-              onClick={() => setActiveTab("Single")}
+              onClick={() => handleActiveTab("Single")}
               className={`h-[44px] w-full p-[10px] rounded-[40px] text-sm font-medium  flex items-center justify-center gap-[10px] font-poppins opacity-100 ${activeTab === "Single"
                 ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
                 : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
@@ -323,7 +368,7 @@ Meeting Management System`;
             </button>
 
             <button
-              onClick={() => setActiveTab("PTM")}
+              onClick={() => handleActiveTab("PTM")}
               className={`w-full h-[44px] p-[10px] rounded-[40px] text-sm font-medium transition-all duration-200 flex items-center justify-center gap-[10px] font-poppins ${activeTab === "PTM"
                 ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
                 : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
@@ -379,7 +424,7 @@ Meeting Management System`;
               className="w-[345px] h-[50px] rounded-[16px] px-[10px] py-[10px] text-white font-semibold text-lg mt-8 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
               style={{ backgroundColor: primaryColor }}
             >
-              Create Invite
+              Create Invites
             </button>
           </div>
 

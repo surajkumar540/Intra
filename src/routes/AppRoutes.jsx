@@ -15,6 +15,7 @@ import WelcomeScreen from "../pages/welcome/WelcomeScreen";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import AttendanceOverview from "../components/dashboard/AttendanceOverview";
 import InviteForm from "../components/dashboard/invite/InviteForm";
+import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
 
 const AppRoutes = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(
@@ -107,6 +108,7 @@ const AppRoutes = () => {
                     }
                 />
 
+                {/* InviteForm */}
                 <Route
                     path="/invite-form"
                     element={
@@ -118,7 +120,18 @@ const AppRoutes = () => {
                     }
                 />
 
-                {/* InviteForm */}
+                {/* UpcomingMeetings */}
+                <Route
+                    path="/upcoming-meetings"
+                    element={
+                        isAuthenticated ? (
+                            <UpcomingMeetings />
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    }
+                />
+
 
                 {/* Catch-all route */}
                 <Route
