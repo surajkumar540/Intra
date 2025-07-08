@@ -524,7 +524,7 @@ const AttendanceOverview = () => {
               const getBorderStyle = (status, currentFilter) => {
                 // If filter is "Total", use uniform gray border for all cards
                 if (currentFilter === "Total") {
-                  return "borderborder-gray-400/50"; // 50% opacity gray border
+                  return "border-gray-300";
                 }
 
                 // Otherwise, use status-specific borders

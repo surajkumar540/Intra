@@ -247,9 +247,8 @@ Meeting Management System`;
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `meeting-invite-${formData.studentRollNo || "draft"}-${
-      new Date().toISOString().split("T")[0]
-    }.txt`;
+    a.download = `meeting-invite-${formData.studentRollNo || "draft"}-${new Date().toISOString().split("T")[0]
+      }.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -307,22 +306,20 @@ Meeting Management System`;
           <div className="flex justify-center gap-2 mt-2">
             <button
               onClick={() => setActiveTab("Single")}
-              className={`h-[44px] w-full p-[10px] rounded-[40px] text-sm font-medium  flex items-center justify-center gap-[10px] font-poppins opacity-100 ${
-                activeTab === "Single"
-                  ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
-                  : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
-              }`}
+              className={`h-[44px] w-full p-[10px] rounded-[40px] text-sm font-medium  flex items-center justify-center gap-[10px] font-poppins opacity-100 ${activeTab === "Single"
+                ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
+                : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
+                }`}
             >
               Single
             </button>
 
             <button
               onClick={() => setActiveTab("PTM")}
-              className={`w-full h-[44px] p-[10px] rounded-[40px] text-sm font-medium transition-all duration-200 flex items-center justify-center gap-[10px] font-poppins ${
-                activeTab === "PTM"
-                  ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
-                  : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
-              }`}
+              className={`w-full h-[44px] p-[10px] rounded-[40px] text-sm font-medium transition-all duration-200 flex items-center justify-center gap-[10px] font-poppins ${activeTab === "PTM"
+                ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
+                : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
+                }`}
             >
               PTM
             </button>
@@ -336,23 +333,26 @@ Meeting Management System`;
 
             {/* Student Roll No */}
             <div className="relative">
-              <input
-                type="text"
-                placeholder="Student Roll No.*"
-                value={formData.studentRollNo}
-                onChange={(e) =>
-                  handleInputChange("studentRollNo", e.target.value)
-                }
-                onFocus={() => setShowStudentDropdown(true)}
-                onBlur={() =>
-                  setTimeout(() => setShowStudentDropdown(false), 200)
-                }
-                className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none text-sm transition-all duration-200  placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] ${
-                  errors.studentRollNo
+              <div className="relative">
+                <input
+                  type="text"
+                  value={formData.studentRollNo}
+                  onChange={(e) => handleInputChange("studentRollNo", e.target.value)}
+                  onFocus={() => setShowStudentDropdown(true)}
+                  onBlur={() => setTimeout(() => setShowStudentDropdown(false), 200)}
+                  className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentRollNo
                     ? "border-red-400 focus:border-red-500"
                     : "border-gray-200 focus:border-pink-400"
-                }`}
-              />
+                    }`}
+                  placeholder=" "
+                />
+                {!formData.studentRollNo && (
+                  <label className="absolute left-[20px] top-1/2 transform -translate-y-1/2 pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                    Student Roll No.<span className="text-red-500">*</span>
+                  </label>
+                )}
+              </div>
+
               <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               {showStudentDropdown && (
                 <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
@@ -380,20 +380,24 @@ Meeting Management System`;
             </div>
 
             {/* Student Name */}
-            <div>
+            <div className="relative">
               <input
                 type="text"
-                placeholder="Student Name*"
                 value={formData.studentName}
                 onChange={(e) =>
                   handleInputChange("studentName", e.target.value)
                 }
-                className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none text-sm transition-all duration-200  placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] ${
-                  errors.studentName
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-gray-200 focus:border-pink-400"
-                }`}
+                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentName
+                  ? "border-red-400 focus:border-red-500"
+                  : "border-gray-200 focus:border-pink-400"
+                  }`}
+                placeholder=" "
               />
+              {!formData.studentName && (
+                <label className="absolute left-[20px] top-1/2 transform -translate-y-1/2 pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                  Student Name<span className="text-red-500">*</span>
+                </label>
+              )}
               {errors.studentName && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.studentName}
@@ -402,18 +406,22 @@ Meeting Management System`;
             </div>
 
             {/* Host Name */}
-            <div>
+            <div className="relative">
               <input
                 type="text"
-                placeholder="Host Name*"
                 value={formData.hostName}
                 onChange={(e) => handleInputChange("hostName", e.target.value)}
-                className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none text-sm transition-all duration-200  placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] ${
-                  errors.hostName
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-gray-200 focus:border-pink-400"
-                }`}
+                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.hostName
+                  ? "border-red-400 focus:border-red-500"
+                  : "border-gray-200 focus:border-pink-400"
+                  }`}
+                placeholder=" "
               />
+              {!formData.hostName && (
+                <label className="absolute left-[20px] top-1/2 transform -translate-y-1/2 pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                  Host Name<span className="text-red-500">*</span>
+                </label>
+              )}
               {errors.hostName && (
                 <p className="text-red-500 text-xs mt-1">{errors.hostName}</p>
               )}
@@ -424,7 +432,6 @@ Meeting Management System`;
               <div className="flex-1 relative">
                 <input
                   type="text"
-                  placeholder="Date*"
                   value={
                     formData.date
                       ? new Date(formData.date).toLocaleDateString()
@@ -432,12 +439,17 @@ Meeting Management System`;
                   }
                   onClick={() => setShowCalendar(!showCalendar)}
                   readOnly
-                  className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none text-sm transition-all duration-200  placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] cursor-pointer ${
-                    errors.date
-                      ? "border-red-400"
-                      : "border-gray-200 hover:border-pink-300"
-                  }`}
+                  className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] cursor-pointer ${errors.date
+                    ? "border-red-400"
+                    : "border-gray-200 hover:border-pink-300"
+                    }`}
+                  placeholder=" "
                 />
+                {!formData.date && (
+                  <label className="absolute left-[20px] top-1/2 transform -translate-y-1/2 pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                    Date<span className="text-red-500">*</span>
+                  </label>
+                )}
                 <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                 {errors.date && (
                   <p className="text-red-500 text-xs mt-1">{errors.date}</p>
@@ -484,15 +496,13 @@ Meeting Management System`;
                             key={index}
                             onClick={() => handleDateSelect(day)}
                             disabled={!day}
-                            className={`h-9 w-9 text-sm rounded-lg flex items-center justify-center transition-all duration-200 ${
-                              day
-                                ? "hover:bg-gray-100 cursor-pointer"
-                                : "cursor-default"
-                            } ${
-                              isSelectedDate(day)
+                            className={`h-9 w-9 text-sm rounded-lg flex items-center justify-center transition-all duration-200 ${day
+                              ? "hover:bg-gray-100 cursor-pointer"
+                              : "cursor-default"
+                              } ${isSelectedDate(day)
                                 ? "text-white font-semibold shadow-lg transform scale-110"
                                 : "text-gray-700"
-                            }`}
+                              }`}
                             style={{
                               backgroundColor: isSelectedDate(day)
                                 ? primaryColor
@@ -511,26 +521,30 @@ Meeting Management System`;
                 type="text"
                 placeholder="Day"
                 value={formData.day}
-                className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none text-sm bg-gray-50"
+                className={`h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] border-gray-200`}
                 readOnly
               />
             </div>
 
             {/* Meeting Agenda */}
-            <div>
+            <div className="relative">
               <input
                 type="text"
-                placeholder="Meeting Agenda*"
                 value={formData.meetingAgenda}
                 onChange={(e) =>
                   handleInputChange("meetingAgenda", e.target.value)
                 }
-                className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none text-sm transition-all duration-200  placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] ${
-                  errors.meetingAgenda
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-gray-200 focus:border-pink-400"
-                }`}
+                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingAgenda
+                  ? "border-red-400 focus:border-red-500"
+                  : "border-gray-200 focus:border-pink-400"
+                  }`}
+                placeholder=" "
               />
+              {!formData.meetingAgenda && (
+                <label className="absolute left-[20px] top-1/2 transform -translate-y-1/2 pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                  Meeting Agenda<span className="text-red-500">*</span>
+                </label>
+              )}
               {errors.meetingAgenda && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.meetingAgenda}
@@ -542,19 +556,23 @@ Meeting Management System`;
             <div className="relative">
               <input
                 type="text"
-                placeholder="Meeting Room*"
                 value={formData.meetingRoom}
                 onChange={(e) =>
                   handleInputChange("meetingRoom", e.target.value)
                 }
                 onFocus={() => setShowRoomDropdown(true)}
                 onBlur={() => setTimeout(() => setShowRoomDropdown(false), 200)}
-                className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none text-sm transition-all duration-200  placeholder:font-poppins placeholder:font-medium placeholder:text-[14px] placeholder:leading-[100%] placeholder:tracking-[0%] ${
-                  errors.meetingRoom
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-gray-200 focus:border-pink-400"
-                }`}
+                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingRoom
+                  ? "border-red-400 focus:border-red-500"
+                  : "border-gray-200 focus:border-pink-400"
+                  }`}
+                placeholder=" "
               />
+              {!formData.meetingRoom && (
+                <label className="absolute left-[20px] top-1/2 transform -translate-y-1/2 pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                  Meeting Room<span className="text-red-500">*</span>
+                </label>
+              )}
               <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               {showRoomDropdown && (
                 <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
