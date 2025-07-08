@@ -53,40 +53,44 @@ const ForgetPassword = () => {
                     <IoIosArrowBack size={20} />
                 </button>
 
-                <div className="flex flex-col gap-4 my-6">
+                <div className="flex flex-col gap-4 mt-12">
                     <p className="font-poppins font-normal text-[18px] leading-[19.1px] tracking-[0px] antialiased text-[#1E1E1E]">
                         Forgot password
                     </p>
-                    <p className="font-poppins font-normal text-[14px] leading-[19.1px] tracking-[0px] antialiased">
+
+                    <p className="font-poppins font-normal text-[14px] leading-[14px] tracking-[0px] text-[#989898]">
                         {showOtpInput
                             ? "Enter the OTP sent to your email"
                             : "Please enter your email to reset the password"}
                     </p>
+
                 </div>
 
-                <form className="rounded-3xl space-y-5">
+                <form className="rounded-3xl  pt-6 space-y-5">
                     {!showOtpInput ? (
                         <div className="space-y-2">
-                            <label className="font-poppins text-[14px]">Your Email</label>
-                            <div className="relative">
+                            <label className="font-openSans font-semibold text-[16px] leading-[19.1px] tracking-[-0.48px]">
+                                Your Email
+                            </label>
+
+                            <div className="relative pb-6">
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className={`w-full px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${errors.email
-                                            ? "border-red-300 focus:border-red-500"
-                                            : "border-gray-200 focus:border-primary"
+                                        ? "border-red-300 focus:border-red-500"
+                                        : "border-gray-200 focus:border-primary"
                                         }`}
                                     placeholder="Enter your email"
                                 />
-                                <IoMailOutline className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             </div>
                             {errors.email && (
                                 <p className="text-sm text-red-500 mt-1">{errors.email}</p>
                             )}
                             <button
                                 onClick={handleReset}
-                                className="w-full mt-4 bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200"
+                                className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200"
                             >
                                 Reset Password
                             </button>
@@ -99,8 +103,8 @@ const ForgetPassword = () => {
                                 value={otp}
                                 onChange={(e) => setOtp(e.target.value)}
                                 className={`w-full px-4 py-3 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${errors.otp
-                                        ? "border-red-300 focus:border-red-500"
-                                        : "border-gray-200 focus:border-primary"
+                                    ? "border-red-300 focus:border-red-500"
+                                    : "border-gray-200 focus:border-primary"
                                     }`}
                                 placeholder="Enter 4-digit OTP"
                             />
