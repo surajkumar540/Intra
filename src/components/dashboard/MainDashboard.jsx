@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../common/NavbarHeader"; // Import the reusable navbar
 import entraLogo from "../../assets/offical/entraLogo.png";
+import ChartComponent from "../common/Chart";
 
 export default function MainDashboard() {
   const navigate = useNavigate();
@@ -434,37 +435,7 @@ export default function MainDashboard() {
                 </h2>
               </div>
 
-              <div className="flex items-center justify-center mb-4">
-                <div className="relative w-32 h-32">
-                  <svg
-                    className="w-32 h-32 transform -rotate-90"
-                    viewBox="0 0 36 36"
-                  >
-                    <path
-                      d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
-                      fill="none"
-                      stroke="#e5e7eb"
-                      strokeWidth="4"
-                    />
-                    <path
-                      d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
-                      fill="none"
-                      stroke="#8ACC7D"
-                      strokeWidth="4"
-                      strokeDasharray={`${dashboardData.attendancePercentage}, 100`}
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-gray-800 font-poppins">
-                      {dashboardData.attendancePercentage}%
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <ChartComponent />
 
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
