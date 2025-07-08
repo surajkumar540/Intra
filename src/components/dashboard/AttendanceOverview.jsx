@@ -25,27 +25,26 @@ import NavbarHeader from "../common/NavbarHeader";
 const AttendanceOverview = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Get filter parameter from URL
   const urlParams = new URLSearchParams(location.search);
   const urlFilter = urlParams.get('filter');
-  
+
   // Initialize selectedFilter based on URL parameter
   const [selectedFilter, setSelectedFilter] = useState(() => {
     // Map URL filter values to display values
     const filterMap = {
       'present': 'Present',
       'absent': 'Absent',
-      'late': 'Late',
       'leave': 'Leave',
       'total': 'Total',
       'upcoming': 'Total', // Default to Total for upcoming
       'previous': 'Total'   // Default to Total for previous
     };
-    
+
     return filterMap[urlFilter?.toLowerCase()] || 'Total';
   });
-  
+
   const [selectedDate, setSelectedDate] = useState("2025-06-01");
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date(2025, 5, 1)); // June 2025
@@ -64,18 +63,17 @@ const AttendanceOverview = () => {
     const filterMap = {
       'present': 'Present',
       'absent': 'Absent',
-      'late': 'Late',
       'leave': 'Leave',
       'total': 'Total',
       'upcoming': 'Total',
       'previous': 'Total'
     };
-    
+
     const newFilter = filterMap[urlFilter?.toLowerCase()] || 'Total';
     setSelectedFilter(newFilter);
   }, [urlFilter]);
 
-  const filters = ["Total", "Present", "Absent", "Late", "Leave"];
+  const filters = ["Total", "Present", "Absent", "Leave"];
 
   const studentsData = [
     {
@@ -106,7 +104,7 @@ const AttendanceOverview = () => {
       id: 4,
       name: "Sneha Patel",
       rollNo: "14",
-      status: "Late",
+      status: "Leave",
       avatar: "SP",
       phone: "+91 9876543213",
     },
@@ -174,7 +172,7 @@ const AttendanceOverview = () => {
   // Update URL when filter changes manually
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter);
-    
+
     // Update URL parameter
     const newParams = new URLSearchParams(location.search);
     newParams.set('filter', filter.toLowerCase());
@@ -382,10 +380,10 @@ const AttendanceOverview = () => {
         </div>
         <div className="mt-6 px-6">
           {/* Date Selector */}
-          <div className="bg-white  mb-4 relative w-full">
+          <div className="bg-white  mb-4 relative w-full ">
             <div
-              className="flex items-center gap-4 cursor-pointer w-full h-[56px] rounded-[16px] border border-[#0000001A] px-6 py-4"
-              style={{ boxShadow: "0px 0px 1px 0px #00000040", opacity: 1 }}
+              className="flex items-center gap-4 cursor-pointer w-full h-[56px] rounded-[16px] border border-[#0000001A] px-6 py-4 shadow-[0px_2px_8px_0px_rgba(99,99,99,0.2)]"
+
               onClick={() => setShowCalendar(!showCalendar)}
             >
               <Calendar className="w-5 h-5 font-medium text-black/50" />
@@ -441,21 +439,18 @@ const AttendanceOverview = () => {
                         disabled={!day}
                         className={`
                                                     h-8 w-8 text-sm rounded-full flex items-center justify-center
-                                                    ${
-                                                      day
-                                                        ? "hover:bg-gray-100 cursor-pointer"
-                                                        : "cursor-default"
-                                                    }
-                                                    ${
-                                                      isSelectedDate(day)
-                                                        ? "text-white font-medium"
-                                                        : "text-gray-700"
-                                                    }
-                                                    ${
-                                                      day
-                                                        ? "hover:bg-opacity-80"
-                                                        : ""
-                                                    }
+                                                    ${day
+                            ? "hover:bg-gray-100 cursor-pointer"
+                            : "cursor-default"
+                          }
+                                                    ${isSelectedDate(day)
+                            ? "text-white font-medium"
+                            : "text-gray-700"
+                          }
+                                                    ${day
+                            ? "hover:bg-opacity-80"
+                            : ""
+                          }
                                                 `}
                         style={{
                           backgroundColor: isSelectedDate(day)
@@ -502,11 +497,10 @@ const AttendanceOverview = () => {
               <button
                 key={filter}
                 onClick={() => handleFilterChange(filter)}
-                className={`w-[89px] h-[44px] p-2 rounded-[30px] text-sm font-medium text-center transition-all font-poppins ${
-                  selectedFilter === filter
-                    ? "text-white"
-                    : "outline outline-1 text-black/50"
-                }`}
+                className={`w-[89px] h-[44px] p-2 rounded-[30px] text-sm font-medium text-center transition-all text-[12px] leading-[100%] tracking-[0] font-poppins ${selectedFilter === filter
+                  ? "text-white"
+                  : "outline outline-1 text-black/50"
+                  }`}
                 style={{
                   backgroundColor:
                     selectedFilter === filter ? "#FE697D" : "transparent",
@@ -541,12 +535,19 @@ const AttendanceOverview = () => {
 
                   {/* Student Info */}
                   <div>
-                    <h3 className="font-medium text-gray-800 text-sm">
-                      Name - {student.name}
-                    </h3>
-                    <p className="text-gray-500 text-xs">
-                      Roll No. - {student.rollNo}
+                    <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
+                      Name - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                        {student.name}
+                      </span>
                     </p>
+
+
+                    <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
+                      Roll No. - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                        {student.rollNo}
+                      </span>
+                    </p>
+
                   </div>
                 </div>
 
@@ -554,19 +555,18 @@ const AttendanceOverview = () => {
                 <div className="flex items-center space-x-3">
                   <button
                     onClick={() => handlePhoneCall(student)}
-                    className="p-2 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
-                    style={{ borderColor: "#FE697D" }}
+                    className="p-2 bg-[#F8F8F8] rounded-full hover:bg-gray-50 transition-colors text-primary"
+
                     title={`Call ${student.name}`}
                   >
                     <Phone className="w-4 h-4" style={{ color: "#FE697D" }} />
                   </button>
                   <button
                     onClick={() => handleEditStudent(student)}
-                    className="p-2 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
-                    style={{ borderColor: "#FE697D" }}
                     title={`Edit ${student.name}`}
+                    className="p-2 bg-[#F8F8F8] rounded-full hover:bg-gray-50 transition-colors text-primary"
                   >
-                    <Edit className="w-4 h-4" style={{ color: "#FE697D" }} />
+                    <Edit className="w-4 h-4 text-primary " />
                   </button>
                 </div>
               </div>
@@ -622,122 +622,7 @@ const AttendanceOverview = () => {
             </div>
           </div>
         )}
-        {/* Edit Modal */}
-        {showEditModal && selectedStudent && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-2xl p-6 w-80 mx-4 max-h-96 overflow-y-auto">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  Edit Student
-                </h3>
-                <button
-                  onClick={() => setShowEditModal(false)}
-                  className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                >
-                  <X className="w-5 h-5 text-gray-500" />
-                </button>
-              </div>
 
-              <div className="space-y-4">
-                {/* Name Input */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    <User className="inline w-4 h-4 mr-1" />
-                    Student Name
-                  </label>
-                  <input
-                    type="text"
-                    value={editFormData.name}
-                    onChange={(e) =>
-                      setEditFormData({ ...editFormData, name: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                    placeholder="Enter student name"
-                  />
-                </div>
-
-                {/* Roll Number Input */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    <Hash className="inline w-4 h-4 mr-1" />
-                    Roll Number
-                  </label>
-                  <input
-                    type="text"
-                    value={editFormData.rollNo}
-                    onChange={(e) =>
-                      setEditFormData({
-                        ...editFormData,
-                        rollNo: e.target.value,
-                      })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                    placeholder="Enter roll number"
-                  />
-                </div>
-
-                {/* Phone Input */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    <Phone className="inline w-4 h-4 mr-1" />
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    value={editFormData.phone}
-                    onChange={(e) =>
-                      setEditFormData({
-                        ...editFormData,
-                        phone: e.target.value,
-                      })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                    placeholder="Enter phone number"
-                  />
-                </div>
-
-                {/* Status Select */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Attendance Status
-                  </label>
-                  <select
-                    value={editFormData.status}
-                    onChange={(e) =>
-                      setEditFormData({
-                        ...editFormData,
-                        status: e.target.value,
-                      })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                  >
-                    <option value="Present">Present</option>
-                    <option value="Absent">Absent</option>
-                    <option value="Late">Late</option>
-                  </select>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex space-x-3 pt-4">
-                  <button
-                    onClick={() => setShowEditModal(false)}
-                    className="flex-1 py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleSaveEdit}
-                    className="flex-1 py-2 px-4 text-white rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center"
-                    style={{ backgroundColor: "#FE697D" }}
-                  >
-                    <Save className="w-4 h-4 mr-2" />
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

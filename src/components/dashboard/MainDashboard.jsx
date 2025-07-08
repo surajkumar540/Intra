@@ -300,15 +300,13 @@ export default function MainDashboard() {
                             disabled={!day}
                             className={`
                               h-8 w-8 text-sm rounded-full flex items-center justify-center
-                              ${
-                                day
-                                  ? "hover:bg-gray-100 cursor-pointer"
-                                  : "cursor-default"
+                              ${day
+                                ? "hover:bg-gray-100 cursor-pointer"
+                                : "cursor-default"
                               }
-                              ${
-                                isSelectedDate(day)
-                                  ? "text-white font-medium"
-                                  : "text-gray-700"
+                              ${isSelectedDate(day)
+                                ? "text-white font-medium"
+                                : "text-gray-700"
                               }
                             `}
                             style={{
