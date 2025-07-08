@@ -519,58 +519,80 @@ const AttendanceOverview = () => {
           style={{ maxHeight: "calc(100vh - 280px)" }}
         >
           {filteredStudents.length > 0 ? (
-            filteredStudents.map((student) => (
-              <div
-                key={student.id}
-                className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center space-x-3">
-                  {/* Avatar */}
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-medium"
-                    style={{ backgroundColor: "#FE697D" }}
-                  >
-                    {student.avatar}
+            filteredStudents.map((student) => {
+              // Define border styles based on student status and current filter
+              const getBorderStyle = (status, currentFilter) => {
+                // If filter is "Total", use uniform gray border for all cards
+                if (currentFilter === "Total") {
+                  return "borderborder-gray-400/50"; // 50% opacity gray border
+                }
+
+                // Otherwise, use status-specific borders
+                switch (status) {
+                  case "Present":
+                    return "border border-green-400/50"; // 50% opacity (#30A706 with 50% opacity)
+                  case "Absent":
+                    return "border border-[#FE697D]/50"; // 50% opacity of primary color
+                  case "Leave":
+                    return "border border-blue-300/25"; // 25% opacity (#5F95E8 with 25% opacity)
+
+                  default:
+                    return "border border-black"; // 25% opacity for any other status
+                }
+              };
+
+              return (
+                <div
+                  key={student.id}
+                  className={`bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow border ${getBorderStyle(student.status, selectedFilter)}`}
+                >
+                  <div className="flex items-center space-x-3">
+                    {/* Avatar */}
+                    <div className="w-12 h-12 rounded-full overflow-hidden">
+                      <img
+                        src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=96&h=96&fit=crop"
+                        alt="Student Avatar"
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Student Info */}
+                    <div>
+                      <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
+                        Name - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                          {student.name}
+                        </span>
+                      </p>
+
+                      <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
+                        Roll No. - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                          {student.rollNo}
+                        </span>
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Student Info */}
-                  <div>
-                    <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
-                      Name - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
-                        {student.name}
-                      </span>
-                    </p>
-
-
-                    <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
-                      Roll No. - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
-                        {student.rollNo}
-                      </span>
-                    </p>
-
+                  {/* Action Icons */}
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => handlePhoneCall(student)}
+                      className="p-2 bg-[#F8F8F8] rounded-full hover:bg-gray-50 transition-colors text-primary"
+                      title={`Call ${student.name}`}
+                    >
+                      <Phone className="w-4 h-4 rotate-12" />
+                    </button>
+                    <button
+                      onClick={() => handleEditStudent(student)}
+                      title={`Edit ${student.name}`}
+                      className="p-2 bg-[#F8F8F8] rounded-full hover:bg-gray-50 transition-colors text-primary"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-
-                {/* Action Icons */}
-                <div className="flex items-center space-x-3">
-                  <button
-                    onClick={() => handlePhoneCall(student)}
-                    className="p-2 bg-[#F8F8F8] rounded-full hover:bg-gray-50 transition-colors text-primary"
-
-                    title={`Call ${student.name}`}
-                  >
-                    <Phone className="w-4 h-4" style={{ color: "#FE697D" }} />
-                  </button>
-                  <button
-                    onClick={() => handleEditStudent(student)}
-                    title={`Edit ${student.name}`}
-                    className="p-2 bg-[#F8F8F8] rounded-full hover:bg-gray-50 transition-colors text-primary"
-                  >
-                    <Edit className="w-4 h-4 text-primary " />
-                  </button>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500">
