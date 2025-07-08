@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronLeft,
   Calendar,
@@ -19,11 +19,33 @@ import {
   Hash,
   Download,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import NavbarHeader from "../common/NavbarHeader";
+
 const AttendanceOverview = () => {
   const navigate = useNavigate();
-  const [selectedFilter, setSelectedFilter] = useState("Total");
+  const location = useLocation();
+  
+  // Get filter parameter from URL
+  const urlParams = new URLSearchParams(location.search);
+  const urlFilter = urlParams.get('filter');
+  
+  // Initialize selectedFilter based on URL parameter
+  const [selectedFilter, setSelectedFilter] = useState(() => {
+    // Map URL filter values to display values
+    const filterMap = {
+      'present': 'Present',
+      'absent': 'Absent',
+      'late': 'Late',
+      'leave': 'Leave',
+      'total': 'Total',
+      'upcoming': 'Total', // Default to Total for upcoming
+      'previous': 'Total'   // Default to Total for previous
+    };
+    
+    return filterMap[urlFilter?.toLowerCase()] || 'Total';
+  });
+  
   const [selectedDate, setSelectedDate] = useState("2025-06-01");
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date(2025, 5, 1)); // June 2025
@@ -36,6 +58,22 @@ const AttendanceOverview = () => {
     status: "",
     phone: "",
   });
+
+  // Update filter when URL changes
+  useEffect(() => {
+    const filterMap = {
+      'present': 'Present',
+      'absent': 'Absent',
+      'late': 'Late',
+      'leave': 'Leave',
+      'total': 'Total',
+      'upcoming': 'Total',
+      'previous': 'Total'
+    };
+    
+    const newFilter = filterMap[urlFilter?.toLowerCase()] || 'Total';
+    setSelectedFilter(newFilter);
+  }, [urlFilter]);
 
   const filters = ["Total", "Present", "Absent", "Late", "Leave"];
 
@@ -125,8 +163,23 @@ const AttendanceOverview = () => {
   // Filter students based on selected filter
   const filteredStudents = studentsData.filter((student) => {
     if (selectedFilter === "Total") return true;
+    if (selectedFilter === "Leave") {
+      // You might want to add a "Leave" status to your student data
+      // For now, treating "Leave" as a separate status
+      return student.status === "Leave";
+    }
     return student.status === selectedFilter;
   });
+
+  // Update URL when filter changes manually
+  const handleFilterChange = (filter) => {
+    setSelectedFilter(filter);
+    
+    // Update URL parameter
+    const newParams = new URLSearchParams(location.search);
+    newParams.set('filter', filter.toLowerCase());
+    navigate(`${location.pathname}?${newParams.toString()}`, { replace: true });
+  };
 
   // Format date for display
   const formatDate = (dateString) => {
@@ -448,7 +501,7 @@ const AttendanceOverview = () => {
             {filters.map((filter) => (
               <button
                 key={filter}
-                onClick={() => setSelectedFilter(filter)}
+                onClick={() => handleFilterChange(filter)}
                 className={`w-[89px] h-[44px] p-2 rounded-[30px] text-sm font-medium text-center transition-all font-poppins ${
                   selectedFilter === filter
                     ? "text-white"

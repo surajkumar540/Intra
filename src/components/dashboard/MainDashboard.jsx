@@ -1,4 +1,4 @@
-// Now, your updated MainDashboard.jsx
+// Updated MainDashboard.jsx with dynamic redirects
 import React, { useState } from "react";
 import {
   Calendar,
@@ -34,13 +34,13 @@ export default function MainDashboard() {
 
   // Navbar event handlers
   const handleUserClick = () => {
-    navigate("/profile");
+    // navigate("/profile");
     // or show user menu
     console.log("User profile clicked");
   };
 
   const handleSettingsClick = () => {
-    navigate("/settings");
+    // navigate("/settings");
     // or show settings menu
     console.log("Settings clicked");
   };
@@ -124,7 +124,12 @@ export default function MainDashboard() {
   };
 
   const handleViewDetailedReport = () => {
-    window.location.href = "/attendance-overview";
+    navigate("/attendance-overview");
+  };
+
+  // Dynamic redirect function based on status
+  const handleRedirect = (status) => {
+    navigate(`/attendance-overview?filter=${status}`);
   };
 
   return (
@@ -175,6 +180,7 @@ export default function MainDashboard() {
                     "linear-gradient(0deg, #000000, #000000), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
+                onClick={() => handleRedirect("upcoming")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 opacity-100"></div>
                 <div className="relative  flex flex-col gap-2 h-full">
@@ -199,6 +205,7 @@ export default function MainDashboard() {
                   background: "rgba(233, 233, 233, 1)",
                   opacity: 1,
                 }}
+                onClick={() => handleRedirect("previous")}
               >
                 <div className="flex items-center justify-between mb-2">
                   <ClockFading className="w-6 h-6 text-gray-600" />
@@ -320,10 +327,10 @@ export default function MainDashboard() {
               </div>
             </div>
 
-            {/* Stats Grid */}
+            {/* Stats Grid - Now with dynamic redirects */}
             <div className="grid grid-cols-2 gap-4 pt-6">
               <div
-                className="rounded-xl p-4 text-white cursor-pointer transition-colors relative overflow-hidden"
+                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden"
                 style={{
                   width: "165px",
                   height: "76px",
@@ -331,6 +338,7 @@ export default function MainDashboard() {
                     "linear-gradient(0deg, #000000, #000000), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
+                onClick={() => handleRedirect("present")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 "></div>
                 <div className="relative z-2 h-full">
@@ -346,7 +354,7 @@ export default function MainDashboard() {
               </div>
 
               <div
-                className="rounded-xl p-4 cursor-pointer transition-colors relative overflow-hidden"
+                className="rounded-xl p-4 cursor-pointer hover:bg-gray-300 transition-all relative overflow-hidden"
                 style={{
                   width: "165px",
                   height: "76px",
@@ -354,6 +362,7 @@ export default function MainDashboard() {
                     "linear-gradient(0deg, #E8E8E8, #E8E8E8), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
+                onClick={() => handleRedirect("absent")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 pointer-events-none"></div>
                 <div className="relative z-2 h-full">
@@ -369,7 +378,7 @@ export default function MainDashboard() {
               </div>
 
               <div
-                className="rounded-xl p-4 cursor-pointer transition-colors relative overflow-hidden"
+                className="rounded-xl p-4 cursor-pointer hover:bg-gray-300 transition-all relative overflow-hidden"
                 style={{
                   width: "165px",
                   height: "76px",
@@ -377,6 +386,7 @@ export default function MainDashboard() {
                     "linear-gradient(0deg, #E8E8E8, #E8E8E8), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
+                onClick={() => handleRedirect("leave")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 pointer-events-none"></div>
                 <div className="relative z-2 h-full">
@@ -392,7 +402,7 @@ export default function MainDashboard() {
               </div>
 
               <div
-                className="rounded-xl p-4 text-white cursor-pointer transition-colors relative overflow-hidden"
+                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden"
                 style={{
                   width: "165px",
                   height: "76px",
@@ -400,6 +410,7 @@ export default function MainDashboard() {
                     "linear-gradient(0deg, #000000, #000000), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
+                onClick={() => handleRedirect("total")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20"></div>
                 <div className="relative z-2 h-full">
@@ -423,12 +434,6 @@ export default function MainDashboard() {
                 <h2 className="text-lg font-semibold text-gray-800 font-poppins">
                   Attendance
                 </h2>
-                <button
-                  onClick={handleViewDetailedReport}
-                  className="text-primary text-sm flex items-center font-poppins"
-                >
-                  View Details <ChevronRight className="w-4 h-4 ml-1" />
-                </button>
               </div>
 
               <div className="flex items-center justify-center mb-4">
