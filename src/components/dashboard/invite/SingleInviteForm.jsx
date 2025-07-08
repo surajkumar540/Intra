@@ -179,14 +179,14 @@ export default function SingleInviteForm({
                                 onChange={(e) => handleInputChange("studentRollNo", e.target.value)}
                                 onFocus={() => setShowStudentDropdown(true)}
                                 onBlur={() => setTimeout(() => setShowStudentDropdown(false), 200)}
-                                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentRollNo
+                                className={`w-full h-[41px] px-[20px] py-[10px]  rounded-[14px] focus:outline-none text-sm transition-all duration-200 border border-[#989898] font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${errors.studentRollNo
                                     ? "border-red-400 focus:border-red-500"
                                     : "border-gray-200 focus:border-pink-400"
                                     }`}
                                 placeholder=" "
                             />
                             {!formData.studentRollNo && (
-                                <label className="absolute left-[20px] top-[35%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                                <label className="absolute left-[20px] top-[35%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
                                     Student Roll No.<span className="text-red-500">*</span>
                                 </label>
                             )}
@@ -231,14 +231,14 @@ export default function SingleInviteForm({
                             onChange={(e) =>
                                 handleInputChange("studentName", e.target.value)
                             }
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentName
+                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${errors.studentName
                                 ? "border-red-400 focus:border-red-500"
                                 : "border-gray-200 focus:border-pink-400"
                                 }`}
                             placeholder=" "
                         />
                         {!formData.studentName && (
-                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D] transition-all duration-200">
+                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D] transition-all duration-200">
                                 Student Name<span className="text-red-500">*</span>
                             </label>
                         )}
@@ -259,14 +259,14 @@ export default function SingleInviteForm({
                             type="text"
                             value={formData.hostName}
                             onChange={(e) => handleInputChange("hostName", e.target.value)}
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.hostName
+                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${errors.hostName
                                 ? "border-red-400 focus:border-red-500"
                                 : "border-gray-200 focus:border-pink-400"
                                 }`}
                             placeholder=" "
                         />
                         {!formData.hostName && (
-                            <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                            <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
                                 Host Name<span className="text-red-500">*</span>
                             </label>
                         )}
@@ -293,14 +293,14 @@ export default function SingleInviteForm({
                                 }
                                 onClick={() => setShowCalendar(!showCalendar)}
                                 readOnly
-                                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] cursor-pointer ${errors.date
+                                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] cursor-pointer ${errors.date
                                     ? "border-red-400"
                                     : "border-gray-200 hover:border-pink-300"
                                     }`}
                                 placeholder=" "
                             />
                             {!formData.date && (
-                                <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                                <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
                                     Date<span className="text-red-500">*</span>
                                 </label>
                             )}
@@ -381,12 +381,12 @@ export default function SingleInviteForm({
                             <input
                                 type="text"
                                 value={formData.day}
-                                className={`h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-gray-200`}
+                                className={`h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] border-gray-200`}
                                 placeholder=" "
                                 readOnly
                             />
                             {!formData.day && (
-                                <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                                <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
                                     Day
                                 </label>
                             )}
@@ -406,14 +406,14 @@ export default function SingleInviteForm({
                             onChange={(e) =>
                                 handleInputChange("meetingAgenda", e.target.value)
                             }
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingAgenda
+                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${errors.meetingAgenda
                                 ? "border-red-400 focus:border-red-500"
                                 : "border-gray-200 focus:border-pink-400"
                                 }`}
                             placeholder=" "
                         />
                         {!formData.meetingAgenda && (
-                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
                                 Meeting Agenda<span className="text-red-500">*</span>
                             </label>
                         )}
@@ -438,14 +438,14 @@ export default function SingleInviteForm({
                             }
                             onFocus={() => setShowRoomDropdown(true)}
                             onBlur={() => setTimeout(() => setShowRoomDropdown(false), 200)}
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingRoom
+                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${errors.meetingRoom
                                 ? "border-red-400 focus:border-red-500"
                                 : "border-gray-200 focus:border-pink-400"
                                 }`}
                             placeholder=" "
                         />
                         {!formData.meetingRoom && (
-                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
                                 Meeting Room<span className="text-red-500">*</span>
                             </label>
                         )}

@@ -177,13 +177,13 @@ export default function MainDashboard() {
                 className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all font-semibold text-sm relative overflow-hidden w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px]"
                 style={{
                   background:
-                    "linear-gradient(0deg, #000000, #000000), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
+                    "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
                 onClick={() => handleRedirect("upcoming")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 opacity-100"></div>
-                <div className="relative  flex flex-col gap-2 h-full">
+                <div className="relative flex flex-col gap-2 h-full">
                   <div className="flex items-center justify-between">
                     <ClockFading className="w-6 h-6 transform scale-x-[-1]" />
                   </div>
@@ -198,11 +198,11 @@ export default function MainDashboard() {
                 </div>
               </div>
 
+
               {/* Previous Meetings */}
               <div
-                className="rounded-xl p-4 cursor-pointer hover:bg-gray-200 transition-colors w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px]"
+                className="rounded-xl p-4 cursor-pointer hover:bg-gray-200 transition-colors w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px] bg-[#E9E9E9]"
                 style={{
-                  background: "rgba(233, 233, 233, 1)",
                   opacity: 1,
                 }}
                 onClick={() => handleRedirect("previous")}

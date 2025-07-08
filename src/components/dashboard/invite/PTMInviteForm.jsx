@@ -173,315 +173,315 @@ export default function PTMInviteForm({
             </h2>
 
             <div>
-                    {/* Student Roll No */}
-                    <div className="relative">
-                        <div className="relative">
-                            <input
-                                type="text"
-                                value={formData.studentRollNo}
-                                onChange={(e) => handleInputChange("studentRollNo", e.target.value)}
-                                onFocus={() => setShowStudentDropdown(true)}
-                                onBlur={() => setTimeout(() => setShowStudentDropdown(false), 200)}
-                                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentRollNo
-                                    ? "border-red-400 focus:border-red-500"
-                                    : "border-gray-200 focus:border-pink-400"
-                                    }`}
-                                placeholder=" "
-                            />
-                            {!formData.studentRollNo && (
-                                <label className="absolute left-[20px] top-[35%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
-                                    Student Roll No.<span className="text-red-500">*</span>
-                                </label>
-                            )}
-                        </div>
-
-                        <ChevronDown className="absolute right-3 top-[20%] w-4 h-4 text-gray-400" />
-
-                        {showStudentDropdown && (
-                            <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
-                                {studentRollNumbers
-                                    .filter((roll) => roll.includes(formData.studentRollNo))
-                                    .map((roll) => (
-                                        <div
-                                            key={roll}
-                                            className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
-                                            onClick={() => {
-                                                handleInputChange("studentRollNo", roll);
-                                                setShowStudentDropdown(false);
-                                            }}
-                                        >
-                                            {roll}
-                                        </div>
-                                    ))}
-                            </div>
-                        )}
-
-                        {/* Reserve space for error message to prevent layout shift */}
-                        <div className="min-h-[20px] mt-1">
-                            {errors.studentRollNo && (
-                                <p className="text-red-500 text-xs animate-in fade-in duration-200">
-                                    {errors.studentRollNo}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Student Name */}
+                {/* Student Roll No */}
+                <div className="relative">
                     <div className="relative">
                         <input
                             type="text"
-                            value={formData.studentName}
-                            onChange={(e) =>
-                                handleInputChange("studentName", e.target.value)
-                            }
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentName
+                            value={formData.studentRollNo}
+                            onChange={(e) => handleInputChange("studentRollNo", e.target.value)}
+                            onFocus={() => setShowStudentDropdown(true)}
+                            onBlur={() => setTimeout(() => setShowStudentDropdown(false), 200)}
+                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentRollNo
                                 ? "border-red-400 focus:border-red-500"
                                 : "border-gray-200 focus:border-pink-400"
                                 }`}
                             placeholder=" "
                         />
-                        {!formData.studentName && (
-                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D] transition-all duration-200">
-                                Student Name<span className="text-red-500">*</span>
+                        {!formData.studentRollNo && (
+                            <label className="absolute left-[20px] top-[35%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                                Student Roll No.<span className="text-red-500">*</span>
                             </label>
                         )}
-
-                        {/* Reserve space for error message to prevent layout shift */}
-                        <div className="min-h-[20px] mt-1">
-                            {errors.studentName && (
-                                <p className="text-red-500 text-xs animate-in fade-in duration-200">
-                                    {errors.studentName}
-                                </p>
-                            )}
-                        </div>
                     </div>
 
-                    {/* Host Name */}
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={formData.hostName}
-                            onChange={(e) => handleInputChange("hostName", e.target.value)}
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.hostName
-                                ? "border-red-400 focus:border-red-500"
-                                : "border-gray-200 focus:border-pink-400"
-                                }`}
-                            placeholder=" "
-                        />
-                        {!formData.hostName && (
-                            <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
-                                Host Name<span className="text-red-500">*</span>
-                            </label>
-                        )}
+                    <ChevronDown className="absolute right-3 top-[20%] w-4 h-4 text-gray-400" />
 
-                        {/* Reserve space for error message to prevent layout shift */}
-                        <div className="min-h-[20px] mt-1">
-                            {errors.hostName && (
-                                <p className="text-red-500 text-xs animate-in fade-in duration-200">
-                                    {errors.hostName}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Date and Day */}
-                    <div className="flex gap-3">
-                        <div className="flex-1 relative">
-                            <input
-                                type="text"
-                                value={
-                                    formData.date
-                                        ? new Date(formData.date).toLocaleDateString()
-                                        : ""
-                                }
-                                onClick={() => setShowCalendar(!showCalendar)}
-                                readOnly
-                                className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] cursor-pointer ${errors.date
-                                    ? "border-red-400"
-                                    : "border-gray-200 hover:border-pink-300"
-                                    }`}
-                                placeholder=" "
-                            />
-                            {!formData.date && (
-                                <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
-                                    Date<span className="text-red-500">*</span>
-                                </label>
-                            )}
-                            <Calendar className="absolute right-3 top-[20%] w-4 h-4 text-gray-400 pointer-events-none" />
-
-                            {/* Reserve space for error message to prevent layout shift */}
-                            <div className="min-h-[20px] mt-1">
-                                {errors.date && (
-                                    <p className="text-red-500 text-xs animate-in fade-in duration-200">
-                                        {errors.date}
-                                    </p>
-                                )}
-                            </div>
-
-                            {/* Custom Calendar */}
-                            {showCalendar && (
-                                <div className="absolute top-full right-0 left-0 mt-2 bg-white border-2 rounded-xl shadow-xl z-20 w-80">
-                                    <div className="flex items-center justify-between p-4 border-b">
-                                        <button
-                                            onClick={() => navigateMonth(-1)}
-                                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                                        >
-                                            <ChevronLeft className="w-5 h-5 text-gray-600" />
-                                        </button>
-                                        <h3 className="text-lg font-semibold text-gray-800">
-                                            {getMonthYearDisplay()}
-                                        </h3>
-                                        <button
-                                            onClick={() => navigateMonth(1)}
-                                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                                        >
-                                            <ChevronRight className="w-5 h-5 text-gray-600" />
-                                        </button>
-                                    </div>
-
-                                    <div className="p-4">
-                                        <div className="grid grid-cols-7 gap-1 mb-2">
-                                            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
-                                                (day) => (
-                                                    <div
-                                                        key={day}
-                                                        className="text-center text-xs font-medium text-gray-500 py-2"
-                                                    >
-                                                        {day}
-                                                    </div>
-                                                )
-                                            )}
-                                        </div>
-
-                                        <div className="grid grid-cols-7 gap-1">
-                                            {getDaysInMonth(currentMonth).map((day, index) => (
-                                                <button
-                                                    key={index}
-                                                    onClick={() => handleDateSelect(day)}
-                                                    disabled={!day}
-                                                    className={`h-9 w-9 text-sm rounded-lg flex items-center justify-center transition-all duration-200 ${day
-                                                        ? "hover:bg-gray-100 cursor-pointer"
-                                                        : "cursor-default"
-                                                        } ${isSelectedDate(day)
-                                                            ? "text-white font-semibold shadow-lg transform scale-110"
-                                                            : "text-gray-700"
-                                                        }`}
-                                                    style={{
-                                                        backgroundColor: isSelectedDate(day)
-                                                            ? primaryColor
-                                                            : "transparent",
-                                                    }}
-                                                >
-                                                    {day}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                        <div className="relative">
-                            <input
-                                type="text"
-                                value={formData.day}
-                                className={`h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-gray-200`}
-                                placeholder=" "
-                                readOnly
-                            />
-                            {!formData.day && (
-                                <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
-                                    Day
-                                </label>
-                            )}
-
-                            {/* Reserve space for error message to prevent layout shift */}
-                            <div className="min-h-[20px] mt-1">
-                                {/* Day field typically doesn't have errors since it's auto-populated */}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Meeting Agenda */}
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={formData.meetingAgenda}
-                            onChange={(e) =>
-                                handleInputChange("meetingAgenda", e.target.value)
-                            }
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingAgenda
-                                ? "border-red-400 focus:border-red-500"
-                                : "border-gray-200 focus:border-pink-400"
-                                }`}
-                            placeholder=" "
-                        />
-                        {!formData.meetingAgenda && (
-                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
-                                Meeting Agenda<span className="text-red-500">*</span>
-                            </label>
-                        )}
-
-                        {/* Reserve space for error message to prevent layout shift */}
-                        <div className="min-h-[20px] mt-1">
-                            {errors.meetingAgenda && (
-                                <p className="text-red-500 text-xs animate-in fade-in duration-200">
-                                    {errors.meetingAgenda}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Meeting Room */}
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={formData.meetingRoom}
-                            onChange={(e) =>
-                                handleInputChange("meetingRoom", e.target.value)
-                            }
-                            onFocus={() => setShowRoomDropdown(true)}
-                            onBlur={() => setTimeout(() => setShowRoomDropdown(false), 200)}
-                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingRoom
-                                ? "border-red-400 focus:border-red-500"
-                                : "border-gray-200 focus:border-pink-400"
-                                }`}
-                            placeholder=" "
-                        />
-                        {!formData.meetingRoom && (
-                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
-                                Meeting Room<span className="text-red-500">*</span>
-                            </label>
-                        )}
-                        <ChevronDown className="absolute right-3 top-[30%] transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-
-                        {showRoomDropdown && (
-                            <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
-                                {meetingRooms.map((room) => (
+                    {showStudentDropdown && (
+                        <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
+                            {studentRollNumbers
+                                .filter((roll) => roll.includes(formData.studentRollNo))
+                                .map((roll) => (
                                     <div
-                                        key={room}
-                                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer flex items-center gap-2 transition-colors"
+                                        key={roll}
+                                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
                                         onClick={() => {
-                                            handleInputChange("meetingRoom", room);
-                                            setShowRoomDropdown(false);
+                                            handleInputChange("studentRollNo", roll);
+                                            setShowStudentDropdown(false);
                                         }}
                                     >
-                                        <MapPin className="w-4 h-4 text-gray-400" />
-                                        {room}
+                                        {roll}
                                     </div>
                                 ))}
+                        </div>
+                    )}
+
+                    {/* Reserve space for error message to prevent layout shift */}
+                    <div className="min-h-[20px] mt-1">
+                        {errors.studentRollNo && (
+                            <p className="text-red-500 text-xs animate-in fade-in duration-200">
+                                {errors.studentRollNo}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Student Name */}
+                <div className="relative">
+                    <input
+                        type="text"
+                        value={formData.studentName}
+                        onChange={(e) =>
+                            handleInputChange("studentName", e.target.value)
+                        }
+                        className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.studentName
+                            ? "border-red-400 focus:border-red-500"
+                            : "border-gray-200 focus:border-pink-400"
+                            }`}
+                        placeholder=" "
+                    />
+                    {!formData.studentName && (
+                        <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D] transition-all duration-200">
+                            Student Name<span className="text-red-500">*</span>
+                        </label>
+                    )}
+
+                    {/* Reserve space for error message to prevent layout shift */}
+                    <div className="min-h-[20px] mt-1">
+                        {errors.studentName && (
+                            <p className="text-red-500 text-xs animate-in fade-in duration-200">
+                                {errors.studentName}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Host Name */}
+                <div className="relative">
+                    <input
+                        type="text"
+                        value={formData.hostName}
+                        onChange={(e) => handleInputChange("hostName", e.target.value)}
+                        className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.hostName
+                            ? "border-red-400 focus:border-red-500"
+                            : "border-gray-200 focus:border-pink-400"
+                            }`}
+                        placeholder=" "
+                    />
+                    {!formData.hostName && (
+                        <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                            Host Name<span className="text-red-500">*</span>
+                        </label>
+                    )}
+
+                    {/* Reserve space for error message to prevent layout shift */}
+                    <div className="min-h-[20px] mt-1">
+                        {errors.hostName && (
+                            <p className="text-red-500 text-xs animate-in fade-in duration-200">
+                                {errors.hostName}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Date and Day */}
+                <div className="flex gap-3">
+                    <div className="flex-1 relative">
+                        <input
+                            type="text"
+                            value={
+                                formData.date
+                                    ? new Date(formData.date).toLocaleDateString()
+                                    : ""
+                            }
+                            onClick={() => setShowCalendar(!showCalendar)}
+                            readOnly
+                            className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] cursor-pointer ${errors.date
+                                ? "border-red-400"
+                                : "border-gray-200 hover:border-pink-300"
+                                }`}
+                            placeholder=" "
+                        />
+                        {!formData.date && (
+                            <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                                Date<span className="text-red-500">*</span>
+                            </label>
+                        )}
+                        <Calendar className="absolute right-3 top-[20%] w-4 h-4 text-gray-400 pointer-events-none" />
+
+                        {/* Reserve space for error message to prevent layout shift */}
+                        <div className="min-h-[20px] mt-1">
+                            {errors.date && (
+                                <p className="text-red-500 text-xs animate-in fade-in duration-200">
+                                    {errors.date}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Custom Calendar */}
+                        {showCalendar && (
+                            <div className="absolute top-full right-0 left-0 mt-2 bg-white border-2 rounded-xl shadow-xl z-20 w-80">
+                                <div className="flex items-center justify-between p-4 border-b">
+                                    <button
+                                        onClick={() => navigateMonth(-1)}
+                                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                                    >
+                                        <ChevronLeft className="w-5 h-5 text-gray-600" />
+                                    </button>
+                                    <h3 className="text-lg font-semibold text-gray-800">
+                                        {getMonthYearDisplay()}
+                                    </h3>
+                                    <button
+                                        onClick={() => navigateMonth(1)}
+                                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                                    >
+                                        <ChevronRight className="w-5 h-5 text-gray-600" />
+                                    </button>
+                                </div>
+
+                                <div className="p-4">
+                                    <div className="grid grid-cols-7 gap-1 mb-2">
+                                        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+                                            (day) => (
+                                                <div
+                                                    key={day}
+                                                    className="text-center text-xs font-medium text-gray-500 py-2"
+                                                >
+                                                    {day}
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+
+                                    <div className="grid grid-cols-7 gap-1">
+                                        {getDaysInMonth(currentMonth).map((day, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => handleDateSelect(day)}
+                                                disabled={!day}
+                                                className={`h-9 w-9 text-sm rounded-lg flex items-center justify-center transition-all duration-200 ${day
+                                                    ? "hover:bg-gray-100 cursor-pointer"
+                                                    : "cursor-default"
+                                                    } ${isSelectedDate(day)
+                                                        ? "text-white font-semibold shadow-lg transform scale-110"
+                                                        : "text-gray-700"
+                                                    }`}
+                                                style={{
+                                                    backgroundColor: isSelectedDate(day)
+                                                        ? primaryColor
+                                                        : "transparent",
+                                                }}
+                                            >
+                                                {day}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
+                        )}
+                    </div>
+                    <div className="relative">
+                        <input
+                            type="text"
+                            value={formData.day}
+                            className={`h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-gray-200`}
+                            placeholder=" "
+                            readOnly
+                        />
+                        {!formData.day && (
+                            <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                                Day
+                            </label>
                         )}
 
                         {/* Reserve space for error message to prevent layout shift */}
                         <div className="min-h-[20px] mt-1">
-                            {errors.meetingRoom && (
-                                <p className="text-red-500 text-xs animate-in fade-in duration-200">
-                                    {errors.meetingRoom}
-                                </p>
-                            )}
+                            {/* Day field typically doesn't have errors since it's auto-populated */}
                         </div>
                     </div>
                 </div>
+
+                {/* Meeting Agenda */}
+                <div className="relative">
+                    <input
+                        type="text"
+                        value={formData.meetingAgenda}
+                        onChange={(e) =>
+                            handleInputChange("meetingAgenda", e.target.value)
+                        }
+                        className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingAgenda
+                            ? "border-red-400 focus:border-red-500"
+                            : "border-gray-200 focus:border-pink-400"
+                            }`}
+                        placeholder=" "
+                    />
+                    {!formData.meetingAgenda && (
+                        <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                            Meeting Agenda<span className="text-red-500">*</span>
+                        </label>
+                    )}
+
+                    {/* Reserve space for error message to prevent layout shift */}
+                    <div className="min-h-[20px] mt-1">
+                        {errors.meetingAgenda && (
+                            <p className="text-red-500 text-xs animate-in fade-in duration-200">
+                                {errors.meetingAgenda}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Meeting Room */}
+                <div className="relative">
+                    <input
+                        type="text"
+                        value={formData.meetingRoom}
+                        onChange={(e) =>
+                            handleInputChange("meetingRoom", e.target.value)
+                        }
+                        onFocus={() => setShowRoomDropdown(true)}
+                        onBlur={() => setTimeout(() => setShowRoomDropdown(false), 200)}
+                        className={`w-full h-[41px] px-[20px] py-[10px] border rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-[#989898]  font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] ${errors.meetingRoom
+                            ? "border-red-400 focus:border-red-500"
+                            : "border-gray-200 focus:border-pink-400"
+                            }`}
+                        placeholder=" "
+                    />
+                    {!formData.meetingRoom && (
+                        <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                            Meeting Room<span className="text-red-500">*</span>
+                        </label>
+                    )}
+                    <ChevronDown className="absolute right-3 top-[30%] transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+
+                    {showRoomDropdown && (
+                        <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
+                            {meetingRooms.map((room) => (
+                                <div
+                                    key={room}
+                                    className="px-4 py-3 hover:bg-gray-50 cursor-pointer flex items-center gap-2 transition-colors"
+                                    onClick={() => {
+                                        handleInputChange("meetingRoom", room);
+                                        setShowRoomDropdown(false);
+                                    }}
+                                >
+                                    <MapPin className="w-4 h-4 text-gray-400" />
+                                    {room}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Reserve space for error message to prevent layout shift */}
+                    <div className="min-h-[20px] mt-1">
+                        {errors.meetingRoom && (
+                            <p className="text-red-500 text-xs animate-in fade-in duration-200">
+                                {errors.meetingRoom}
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
 
         {/* Time Selection using TimePicker */}
