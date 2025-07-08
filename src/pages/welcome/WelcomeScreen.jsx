@@ -8,17 +8,17 @@ const slides = [
   {
     image: smartImg,
     title: "Smart Attendance  Tracking",
-    description: "Easily mark and manage student attendance<br>in just a few taps.",
+    description: "Easily mark and manage student attendance <br>in just a few taps.",
   },
   {
     image: parentImg,
-    title: "Seamless Parent Communication",
-    description: "Instantly connect with parents<br>via messages and alerts.",
+    title: "Seamless  Parent Communication",
+    description: "Instantly connect with parents <br>via messages and alerts.",
   },
   {
     image: reportImg,
-    title: "Student Reports at Your Fingertips",
-    description: "Access real-time student performance<br>anytime, anywhere.",
+    title: "Student Reports  at  Your Fingertips",
+    description: "Access real-time student performance <br>anytime, anywhere.",
   },
 ];
 

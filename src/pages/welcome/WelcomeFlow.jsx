@@ -1,15 +1,26 @@
 import { IoIosArrowForward } from "react-icons/io";
 import ProgressDots from "../../components/welcome/ProgressDot";
 
-const WelcomeFlow = ({ image, title, description, total, activeIndex, onNext }) => {
+const WelcomeFlow = ({
+  image,
+  title,
+  description,
+  total,
+  activeIndex,
+  onNext,
+}) => {
   return (
     <div className="h-screen flex items-center justify-center px-4 py-4 ">
-      <div className="w-full max-w-md bg-white rounded-2xl p-6 md:p-8 max-h-full ">
+      <div className="w-full max-w-md bg-white rounded-2xl p-6 md:p-8 max-h-full">
         {/* Image */}
-        <img src={image} alt={title} className="w-full h-auto mb-6 rounded-lg object-contain max-h-48" />
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-[328px] mb-6 rounded-lg object-contain  "
+        />
 
         {/* Title */}
-        <h2 className="text-[28px] md:text-[36px] leading-10 font-bold font-poppins text-[#333333CC] tracking-normal mb-3">
+        <h2 className="text-[36px] leading-tight font-bold font-poppins text-[#333333CC] tracking-normal mb-3">
           {title.split(" ").map((word, i) => (
             <span key={i}>
               {word}
@@ -18,9 +29,8 @@ const WelcomeFlow = ({ image, title, description, total, activeIndex, onNext }) 
           ))}
         </h2>
 
-
         {/* Description */}
-        <p className="text-[18px] md:text-[24px] text-[#929292] font-light font-poppins leading-6 tracking-normal mb-6">
+        <p className="text-[24px] font-light font-poppins leading-[100%] text-[#929292] tracking-normal mb-6">
           {description.split("<br>").map((line, i) => (
             <span key={i}>
               {line}
@@ -29,14 +39,13 @@ const WelcomeFlow = ({ image, title, description, total, activeIndex, onNext }) 
           ))}
         </p>
 
-
         {/* Footer: Dots + Arrow */}
         <div className="flex items-center justify-between">
           <ProgressDots total={total} activeIndex={activeIndex} />
 
           <button
             onClick={onNext}
-            className="w-10 h-10 flex items-center justify-center bg-black text-white rounded-full hover:bg-gray-800 transition"
+            className="w-10 h-10 flex items-center justify-center bg-[#333333CC] text-white rounded-full hover:bg-gray-800 transition"
           >
             <IoIosArrowForward size={20} />
           </button>

@@ -1,20 +1,7 @@
 import { useState } from "react";
-import {
-  ChevronLeft,
-  Share2,
-  Download,
-  Calendar,
-  ChevronDown,
-  Clock,
-  MapPin,
-  User,
-  Users,
-  ChevronRight,
-  Check
-} from "lucide-react";
+import { Share2, Download } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../../common/NavbarHeader";
-import TimePicker from "../../common/TimePicker";
 import SuccessModal from "../../modals/SuccessModal";
 import SingleInviteForm from "./SingleInviteForm";
 import PTMInviteForm from "./PTMInviteForm";
@@ -43,58 +30,6 @@ export default function InviteForm() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const primaryColor = "#FE697D";
-  const studentRollNumbers = [
-    "2024001",
-    "2024002",
-    "2024003",
-    "2024004",
-    "2024005",
-    "2024006",
-    "2024007",
-    "2024008",
-  ];
-  const meetingRooms = [
-    "Conference Room A",
-    "Conference Room B",
-    "Meeting Room 1",
-    "Meeting Room 2",
-    "Virtual Room",
-    "Board Room",
-  ];
-
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: "",
-      }));
-    }
-
-    // Auto-populate day when date is selected
-    if (field === "date" && value) {
-      const selectedDate = new Date(value);
-      const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-      const dayName = days[selectedDate.getDay()];
-      setFormData((prev) => ({
-        ...prev,
-        day: dayName,
-      }));
-    }
-  };
 
   const handleActiveTab = (tab) => {
     setActiveTab(tab);
@@ -107,7 +42,7 @@ export default function InviteForm() {
     setErrors({});
     setShowSuccessPopup(false);
     setShowCalendar(false);
-  }
+  };
 
   // Handle time changes from TimePicker
   const handleTimeChange = (timeData) => {
@@ -124,61 +59,6 @@ export default function InviteForm() {
         endTime: "",
       }));
     }
-  };
-
-  // Calendar helper functions
-  const navigateMonth = (direction) => {
-    const newMonth = new Date(currentMonth);
-    newMonth.setMonth(currentMonth.getMonth() + direction);
-    setCurrentMonth(newMonth);
-  };
-
-  const getMonthYearDisplay = () => {
-    return currentMonth.toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-  };
-
-  const getDaysInMonth = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startingDayOfWeek = firstDay.getDay();
-
-    const days = [];
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      days.push(null);
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-      days.push(day);
-    }
-    return days;
-  };
-
-  const handleDateSelect = (day) => {
-    if (day) {
-      const selectedDate = new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth(),
-        day
-      );
-      const formattedDate = selectedDate.toISOString().split("T")[0];
-      handleInputChange("date", formattedDate);
-      setShowCalendar(false);
-    }
-  };
-
-  const isSelectedDate = (day) => {
-    if (!day || !formData.date) return false;
-    const selectedDate = new Date(formData.date);
-    return (
-      selectedDate.getDate() === day &&
-      selectedDate.getMonth() === currentMonth.getMonth() &&
-      selectedDate.getFullYear() === currentMonth.getFullYear()
-    );
   };
 
   const validateForm = () => {
@@ -200,8 +80,7 @@ export default function InviteForm() {
       // Replace with PTM-specific validations
       if (!formData.className?.trim())
         newErrors.className = "Class is required";
-      if (!formData.section?.trim())
-        newErrors.section = "Section is required";
+      if (!formData.section?.trim()) newErrors.section = "Section is required";
       if (!formData.teacherName?.trim())
         newErrors.teacherName = "Teacher Name is required";
       if (!formData.date?.trim()) newErrors.date = "Date is required";
@@ -220,21 +99,17 @@ export default function InviteForm() {
         newErrors.meetingRoom = "Meeting Room is required";
     }
 
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
 
   const handleCreateInvite = () => {
     console.log("formData", formData);
     if (validateForm()) {
       setShowSuccessPopup(true);
-    }
-    else {
+    } else {
       console.log("errors", errors);
     }
-
   };
 
   const formatTimeForDisplay = (timeObj) => {
@@ -295,8 +170,9 @@ Meeting Management System`;
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `meeting-invite-${formData.studentRollNo || "draft"}-${new Date().toISOString().split("T")[0]
-      }.txt`;
+    a.download = `meeting-invite-${formData.studentRollNo || "draft"}-${
+      new Date().toISOString().split("T")[0]
+    }.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -318,7 +194,6 @@ Meeting Management System`;
     setErrors({});
     setShowSuccessPopup(false);
   };
-
 
   const handleSubmit = () => {
     console.log("formData", formData);
@@ -356,23 +231,25 @@ Meeting Management System`;
 
         <div className="p-4 space-y-6 mx-auto">
           {/* Tab Selection */}
-          <div className="flex justify-center gap-2 mt-2">
+          <div className="flex justify-center gap-4 mt-2">
             <button
               onClick={() => handleActiveTab("Single")}
-              className={`h-[44px] w-full p-[10px] rounded-[40px] text-sm font-medium  flex items-center justify-center gap-[10px] font-poppins opacity-100 ${activeTab === "Single"
-                ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
-                : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
-                }`}
+              className={`w-full h-[44px] p-[10px] rounded-[40px] text-sm font-medium transition-all duration-200 flex items-center justify-center gap-[10px] font-poppins ${
+                activeTab === "Single"
+                  ? "text-primary border border-primary bg-[#FE697D1A]"
+                  : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]"
+              }`}
             >
               Single
             </button>
 
             <button
               onClick={() => handleActiveTab("PTM")}
-              className={`w-full h-[44px] p-[10px] rounded-[40px] text-sm font-medium transition-all duration-200 flex items-center justify-center gap-[10px] font-poppins ${activeTab === "PTM"
-                ? "text-primary border-2 bg-primary/10 border-[#FE697D1A]"
-                : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]  "
-                }`}
+              className={`w-full h-[44px] p-[10px] rounded-[40px] text-sm font-medium transition-all duration-200 flex items-center justify-center gap-[10px] font-poppins ${
+                activeTab === "PTM"
+                  ? "text-primary border bg-[#FE697D1A] border-primary"
+                  : "text-black/70 border border-black/50 hover:bg-[#FE697D1A]"
+              }`}
             >
               PTM
             </button>
@@ -427,15 +304,20 @@ Meeting Management System`;
               Create Invites
             </button>
           </div>
-
         </div>
-
 
         <SuccessModal
           isOpen={showSuccessPopup}
-          onClose={() => setShowSuccessPopup(false)}
+          onClose={() => {
+            setShowSuccessPopup(false);
+            resetForm();
+          }}
           title="Success!"
-          message={activeTab === "Single" ? "The meeting has been scheduled successfully" : "PTM has been scheduled successfully"}
+          message={
+            activeTab === "Single"
+              ? "The meeting has been scheduled successfully"
+              : "PTM has been scheduled successfully"
+          }
           primaryColor={primaryColor}
         />
       </div>

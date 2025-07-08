@@ -1,16 +1,9 @@
-// Updated MainDashboard.jsx with dynamic redirects
+// Updated MainDashboard.jsx with reusable calendar component
 import React, { useState } from "react";
-import {
-  Calendar,
-  ClockFading,
-  CircleUser,
-  Plus,
-  ChevronRight,
-  ChevronLeft,
-  Settings,
-} from "lucide-react";
+import { ClockFading, CircleUser, Plus, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../common/NavbarHeader"; // Import the reusable navbar
+import { CalendarComponent } from "../common/CalendarComponent";
 import entraLogo from "../../assets/offical/entraLogo.png";
 import ChartComponent from "../common/Chart";
 
@@ -18,7 +11,6 @@ export default function MainDashboard() {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("2024-01-15");
   const [showCalendar, setShowCalendar] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState(new Date(2024, 0, 15));
 
   // Mock data for dynamic content
   const [dashboardData, setDashboardData] = useState({
@@ -64,69 +56,28 @@ export default function MainDashboard() {
     }));
   };
 
-  // Calendar functions (keeping your existing logic)
-  const getDaysInMonth = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startingDayOfWeek = firstDay.getDay();
+  // Calendar handlers
+  const handleDateSelect = (dateString) => {
+    setSelectedDate(dateString);
+    setShowCalendar(false);
+    updateDashboardData();
+  };
 
-    const days = [];
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      days.push(null);
+  const handleToggleCalendar = (show) => {
+    if (typeof show === "boolean") {
+      setShowCalendar(show);
+    } else {
+      setShowCalendar(!showCalendar);
     }
-    for (let day = 1; day <= daysInMonth; day++) {
-      days.push(day);
-    }
-    return days;
-  };
-
-  const handleDateSelect = (day) => {
-    if (day) {
-      const year = currentMonth.getFullYear();
-      const month = currentMonth.getMonth();
-      const selectedDateString = `${year}-${String(month + 1).padStart(
-        2,
-        "0"
-      )}-${String(day).padStart(2, "0")}`;
-      setSelectedDate(selectedDateString);
-      setShowCalendar(false);
-      updateDashboardData(selectedDateString);
-    }
-  };
-
-  const navigateMonth = (direction) => {
-    const newMonth = new Date(currentMonth);
-    newMonth.setMonth(currentMonth.getMonth() + direction);
-    setCurrentMonth(newMonth);
-  };
-
-  const getMonthYearDisplay = () => {
-    return currentMonth.toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-  };
-
-  const isSelectedDate = (day) => {
-    if (!day) return false;
-    const year = currentMonth.getFullYear();
-    const month = currentMonth.getMonth();
-    const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(
-      day
-    ).padStart(2, "0")}`;
-    return dateString === selectedDate;
   };
 
   const handleCreateInvite = () => {
     navigate("/invite-form");
   };
 
-  const handleViewDetailedReport = () => {
-    navigate("/attendance-overview");
-  };
+  // const handleViewDetailedReport = () => {
+  //   navigate("/attendance-overview");
+  // };
 
   // Dynamic redirect function based on status
   const handleRedirect = (status) => {
@@ -165,7 +116,7 @@ export default function MainDashboard() {
           />
         </div>
 
-        {/* Main Content - keeping your existing content */}
+        {/* Main Content */}
         <div className="px-4 pt-4 flex flex-col justify-center items-center">
           {/* Appointments Section */}
           <div className="w-full">
@@ -181,7 +132,7 @@ export default function MainDashboard() {
                     "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
-                onClick={() => handleRedirect("upcoming")}
+                onClick={() => navigate("/upcoming-meetings")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 opacity-100"></div>
                 <div className="relative flex flex-col gap-2 h-full">
@@ -198,7 +149,6 @@ export default function MainDashboard() {
                   </div>
                 </div>
               </div>
-
 
               {/* Previous Meetings */}
               <div
@@ -240,90 +190,13 @@ export default function MainDashboard() {
                 Overview
               </h2>
 
-              <div className="relative">
-                <div
-                  className="flex items-center gap-2 cursor-pointer"
-                  onClick={() => setShowCalendar(!showCalendar)}
-                >
-                  <div
-                    className="w-10 h-10 rounded-md flex items-center justify-center border shadow-[1px_1px_8px_0px_#0000001A]"
-                    style={{
-                      background:
-                        "linear-gradient(0deg, rgba(254, 105, 125, 0.08), rgba(254, 105, 125, 0.08))",
-                      border: "1px solid rgba(254, 105, 125, 0.1)",
-                      opacity: 1,
-                    }}
-                  >
-                    <Calendar className="w-5 h-5 text-primary" />
-                  </div>
-                </div>
-
-                {/* Calendar Dropdown */}
-                {showCalendar && (
-                  <div className="absolute top-full right-0 mt-2 bg-white border-2 rounded-lg shadow-lg z-20 w-80">
-                    <div className="flex items-center justify-between p-4 border-b">
-                      <button
-                        onClick={() => navigateMonth(-1)}
-                        className="p-1 hover:bg-gray-100 rounded"
-                      >
-                        <ChevronLeft className="w-5 h-5 text-gray-600" />
-                      </button>
-                      <h3 className="text-lg font-medium text-gray-800">
-                        {getMonthYearDisplay()}
-                      </h3>
-                      <button
-                        onClick={() => navigateMonth(1)}
-                        className="p-1 hover:bg-gray-100 rounded"
-                      >
-                        <ChevronRight className="w-5 h-5 text-gray-600" />
-                      </button>
-                    </div>
-
-                    <div className="p-4">
-                      <div className="grid grid-cols-7 gap-1 mb-2">
-                        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
-                          (day) => (
-                            <div
-                              key={day}
-                              className="text-center text-xs font-medium text-gray-500 py-2"
-                            >
-                              {day}
-                            </div>
-                          )
-                        )}
-                      </div>
-
-                      <div className="grid grid-cols-7 gap-1">
-                        {getDaysInMonth(currentMonth).map((day, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleDateSelect(day)}
-                            disabled={!day}
-                            className={`
-                              h-8 w-8 text-sm rounded-full flex items-center justify-center
-                              ${day
-                                ? "hover:bg-gray-100 cursor-pointer"
-                                : "cursor-default"
-                              }
-                              ${isSelectedDate(day)
-                                ? "text-white font-medium"
-                                : "text-gray-700"
-                              }
-                            `}
-                            style={{
-                              backgroundColor: isSelectedDate(day)
-                                ? "#FE697D"
-                                : "transparent",
-                            }}
-                          >
-                            {day}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
+              {/* Reusable Calendar Component */}
+              <CalendarComponent
+                selectedDate={selectedDate}
+                onDateSelect={handleDateSelect}
+                showCalendar={showCalendar}
+                onToggleCalendar={handleToggleCalendar}
+              />
             </div>
 
             {/* Stats Grid - Now with dynamic redirects */}
@@ -334,7 +207,7 @@ export default function MainDashboard() {
                   width: "165px",
                   height: "76px",
                   background:
-                    "linear-gradient(0deg, #000000, #000000), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
+                    "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
                 onClick={() => handleRedirect("present")}
@@ -406,7 +279,7 @@ export default function MainDashboard() {
                   width: "165px",
                   height: "76px",
                   background:
-                    "linear-gradient(0deg, #000000, #000000), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
+                    "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
                   opacity: 1,
                 }}
                 onClick={() => handleRedirect("total")}
@@ -458,14 +331,6 @@ export default function MainDashboard() {
             </div>
           </div>
         </div>
-
-        {/* Calendar Overlay */}
-        {showCalendar && (
-          <div
-            className="fixed inset-0 z-10"
-            onClick={() => setShowCalendar(false)}
-          />
-        )}
       </div>
     </div>
   );
