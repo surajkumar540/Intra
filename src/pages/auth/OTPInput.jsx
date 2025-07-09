@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function OTPInput({ email = "abcd@gmail" }) {
+ function OTPInput({ email = "abcd@gmail" }) {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputRefs = useRef([]);
@@ -170,3 +170,4 @@ export default function OTPInput({ email = "abcd@gmail" }) {
     </div>
   );
 }
+export default OTPInput;  

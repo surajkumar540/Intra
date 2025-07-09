@@ -16,7 +16,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import AttendanceOverview from "../components/dashboard/AttendanceOverview";
 import InviteForm from "../components/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
-import OTPInput from "../pages/auth/OtpInput";
+import OTPInput from "../pages/auth/OTPInput";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
