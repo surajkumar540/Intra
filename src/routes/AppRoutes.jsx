@@ -17,6 +17,7 @@ import AttendanceOverview from "../components/dashboard/AttendanceOverview";
 import InviteForm from "../components/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
 // import OtpInput from "../pages/auth/OtpInput.jsx";
+import OtpInput from "../pages/auth/OtpInput";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -81,7 +82,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* <Route
+        <Route
           path="/otp-verification"
           element={
             isAuthenticated ? (
@@ -90,7 +91,7 @@ const AppRoutes = () => {
               <OtpInput />
             )
           }
-        /> */}
+        />
 
         <Route
           path="/forgot-password"
