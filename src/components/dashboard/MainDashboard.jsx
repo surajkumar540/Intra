@@ -126,12 +126,8 @@ export default function MainDashboard() {
             <div className="flex flex-row justify-center gap-4 w-full z-20">
               {/* Upcoming Meetings */}
               <div
-                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all font-semibold text-sm relative overflow-hidden w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px]"
-                style={{
-                  background:
-                    "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
-                  opacity: 1,
-                }}
+                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all font-semibold text-sm relative overflow-hidden w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px] bg-dual-gradient"
+              
                 onClick={() => navigate("/upcoming-meetings")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 opacity-100"></div>
@@ -202,14 +198,7 @@ export default function MainDashboard() {
             {/* Stats Grid - Now with dynamic redirects */}
             <div className="grid grid-cols-2 gap-4 pt-6">
               <div
-                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden"
-                style={{
-                  width: "165px",
-                  height: "76px",
-                  background:
-                    "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
-                  opacity: 1,
-                }}
+                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden bg-dual-gradient"
                 onClick={() => handleRedirect("present")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 "></div>
@@ -274,14 +263,8 @@ export default function MainDashboard() {
               </div>
 
               <div
-                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden"
-                style={{
-                  width: "165px",
-                  height: "76px",
-                  background:
-                    "linear-gradient(0deg, #333333, #333333), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%)",
-                  opacity: 1,
-                }}
+                className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden bg-dual-gradient"
+              
                 onClick={() => handleRedirect("total")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20"></div>

@@ -71,7 +71,7 @@ const CancelMeetingPopup = ({ isOpen, onClose, onConfirm, showSuccess }) => {
                                             className="flex-1 text-white py-3 rounded-xl transition-colors hover:opacity-90 bg-primary"
 
                                         >
-                                            Go to back
+                                            Go back
                                         </button>
                                     </div>
                                 </div>
