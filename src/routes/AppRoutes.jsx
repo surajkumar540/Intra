@@ -16,7 +16,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import AttendanceOverview from "../components/dashboard/AttendanceOverview";
 import InviteForm from "../components/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
-import OTPInput from "../pages/auth/OTPInput";
+import OtpInput from "../pages/auth/OtpInput.jsx";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -87,7 +87,7 @@ const AppRoutes = () => {
             isAuthenticated ? (
               <Navigate to="/dashboard" replace />
             ) : (
-              <OTPInput setAuth={setIsAuthenticated} />
+              <OtpInput />
             )
           }
         />

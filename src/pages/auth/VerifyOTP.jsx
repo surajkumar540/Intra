@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import OTPInput from "./OtpInput";
+import OtpInput from "./OtpInput";
 
 const VerifyOTP = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -35,7 +35,7 @@ const VerifyOTP = () => {
       <div className="max-w-sm w-full space-y-6">
         <h1 className="text-xl font-semibold text-center">Enter OTP</h1>
 
-        <OTPInput otp={otp} setOtp={setOtp} email={email} />
+        <OtpInput otp={otp} setOtp={setOtp} email={email} />
 
         <button
           onClick={handleVerify}
