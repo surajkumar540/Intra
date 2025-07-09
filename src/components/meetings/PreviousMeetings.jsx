@@ -4,7 +4,6 @@ import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../common/NavbarHeader";
 import { CalendarComponent } from "../common/CalendarComponent";
-import CancelMeetingPopup from "../modals/CancelMeetingPopup";
 
 const meetingsData = [
   {
@@ -89,14 +88,8 @@ export default function MeetingsDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState("2024-01-15");
   const [showCalendar, setShowCalendar] = useState(false);
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-  const [meetingToCancel, setMeetingToCancel] = useState(null);
-  const [meetings, setMeetings] = useState(meetingsData);
-  const primaryColor = "#FE697D";
 
-  
-  const filteredMeetings = meetings.filter((meeting) => {
+  const filteredMeetings = meetingsData.filter((meeting) => {
     const content = meeting.details
       .map(([, v]) => v)
       .join(" ")
@@ -116,25 +109,6 @@ export default function MeetingsDashboard() {
     } else {
       setShowCalendar(!showCalendar);
     }
-  };
-
-  // Cancel meeting handlers
-  const handleCancelClick = (meetingIndex) => {
-    setMeetingToCancel(meetingIndex);
-    setShowCancelPopup(true);
-  };
-
-  const handleCancelConfirm = () => {
-    // Remove the meeting from the list
-    setMeetings(prev => prev.filter((_, index) => index !== meetingToCancel));
-    setShowCancelPopup(false);
-    setShowSuccessPopup(true);
-  };
-
-  const handlePopupClose = () => {
-    setShowCancelPopup(false);
-    setShowSuccessPopup(false);
-    setMeetingToCancel(null);
   };
 
   return (
@@ -220,10 +194,7 @@ export default function MeetingsDashboard() {
                   <button className="flex-1 py-2 px-4 bg-green-50 text-green-600 rounded-[8px] text-sm font-medium border border-green-200 hover:bg-green-100">
                     Reschedule
                   </button>
-                  <button 
-                    onClick={() => handleCancelClick(index)}
-                    className="flex-1 py-2 px-4 bg-red-50 text-red-600 rounded-[8px] text-sm font-medium border border-red-200 hover:bg-red-100"
-                  >
+                  <button className="flex-1 py-2 px-4 bg-red-50 text-red-600 rounded-[8px] text-sm font-medium border border-red-200 hover:bg-red-100">
                     Cancel
                   </button>
                 </div>
@@ -239,14 +210,6 @@ export default function MeetingsDashboard() {
             <RiAddLine className="text-lg" />
           </button>
         </div>
-
-        {/* Cancel Meeting Popup */}
-        <CancelMeetingPopup
-          isOpen={showCancelPopup || showSuccessPopup}
-          onClose={handlePopupClose}
-          onConfirm={handleCancelConfirm}
-          showSuccess={showSuccessPopup}
-        />
       </div>
     </div>
   );
