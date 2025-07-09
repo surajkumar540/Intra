@@ -43,19 +43,39 @@ const CancelMeetingPopup = ({ isOpen, onClose, onConfirm, showSuccess }) => {
                 ) : (
                     // Second popup - Success
                     <>
-                        <div className="text-center">
-                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Check className="w-8 h-8 text-green-600" />
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                            <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+                                <div className="text-center justify-center items-center w-full space-y-4">
+                                    <div className="flex items-center justify-center">
+                                        <div
+                                            className="rounded-full bg-[#473F970D] w-[80px] h-[80px] flex items-center justify-center"
+                                            style={{ opacity: 1 }}
+                                        >
+                                            <div
+                                                className="rounded-full w-[47.62px] h-[47.62px] flex items-center justify-center bg-green-400"
+                                                style={{ opacity: 1 }}
+                                            >
+                                                <Check className="w-8 h-8 text-white" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-gray-600 text-center font-medium text-[20px] leading-[100%] font-[Poppins] pt-6">
+                                        The meeting has been cancelled successfully
+                                    </p>
+
+                                    <div className="flex gap-3 pt-8">
+                                        <button
+                                            type="button"
+                                            onClick={onClose}
+                                            className="flex-1 text-white py-3 rounded-xl transition-colors hover:opacity-90 bg-primary"
+
+                                        >
+                                            Go to back
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-6">
-                                The meeting has been cancelled successfully
-                            </h3>
-                            <button
-                                onClick={handleClose}
-                                className="w-full py-3 px-4 bg-primary text-white rounded-lg font-medium"
-                            >
-                                Go Back
-                            </button>
                         </div>
                     </>
                 )}
