@@ -16,7 +16,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import AttendanceOverview from "../components/dashboard/AttendanceOverview";
 import InviteForm from "../components/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
-// import OtpInput from "../pages/auth/OtpInput.jsx";
+import AttendanceTracker from "../components/dashboard/reports/AttendanceTracker";
 import OtpInput from "../pages/auth/OtpInput";
 
 const AppRoutes = () => {
@@ -137,6 +137,19 @@ const AppRoutes = () => {
           element={
             isAuthenticated ? (
               <UpcomingMeetings />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* AttendanceTracker */}
+        {/* query params */}
+        <Route
+          path="/report"
+          element={
+            isAuthenticated ? (
+              <AttendanceTracker />
             ) : (
               <Navigate to="/login" replace />
             )
