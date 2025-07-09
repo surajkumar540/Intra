@@ -6,6 +6,7 @@ import NavbarHeader from "../common/NavbarHeader"; // Import the reusable navbar
 import { CalendarComponent } from "../common/CalendarComponent";
 import entraLogo from "../../assets/offical/entraLogo.png";
 import ChartComponent from "../common/Chart";
+import AttendanceInterface from "./AttendanceInterface"
 
 export default function MainDashboard() {
   const navigate = useNavigate();
@@ -117,7 +118,7 @@ export default function MainDashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="px-4 pt-4 flex flex-col justify-center items-center">
+        <div className="px-4 pt-4 flex flex-col justify-center items-center bg-">
           {/* Appointments Section */}
           <div className="w-full">
             <h2 className="text-lg font-semibold text-gray-800 mb-6">
@@ -127,7 +128,7 @@ export default function MainDashboard() {
               {/* Upcoming Meetings */}
               <div
                 className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all font-semibold text-sm relative overflow-hidden w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px] bg-dual-gradient"
-              
+
                 onClick={() => navigate("/upcoming-meetings")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 opacity-100"></div>
@@ -264,7 +265,7 @@ export default function MainDashboard() {
 
               <div
                 className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden bg-dual-gradient"
-              
+
                 onClick={() => handleRedirect("total")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20"></div>
@@ -282,38 +283,52 @@ export default function MainDashboard() {
             </div>
           </div>
 
-          {/* Attendance Section */}
-          <div className="pt-4 w-full">
-            <div className="bg-gray-50 rounded-2xl p-6 w-full">
-              <div className="flex items-center justify-between w-full">
-                <h2 className="text-lg font-semibold text-gray-800 font-poppins">
-                  Attendance
-                </h2>
+        </div>
+
+        {/* Attendance Section */}
+        <div className="pt-4 w-full">
+          <div className="w-full">
+          <div className="bg-gray-50 rounded-2xl p-6 w-full">
+
+            <div className="flex items-center justify-between w-full">
+              <h2 className="text-lg font-semibold text-gray-800 font-poppins">
+                Attendance
+              </h2>
+            </div>
+
+            <ChartComponent />
+          </div>
+          
+
+            <div className="grid grid-cols-2 gap-4 text-center pt-2">
+              <div>
+                <p className="text-sm text-gray-600 font-poppins">
+                  Present Days
+                </p>
+                <p className="text-xl font-bold text-gray-800 font-poppins">
+                  {dashboardData.presentDays}
+                </p>
               </div>
-
-              <ChartComponent />
-
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div>
-                  <p className="text-sm text-gray-600 font-poppins">
-                    Present Days
-                  </p>
-                  <p className="text-xl font-bold text-gray-800 font-poppins">
-                    {dashboardData.presentDays}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 font-poppins">
-                    Total Days
-                  </p>
-                  <p className="text-xl font-bold text-gray-800 font-poppins">
-                    {dashboardData.totalDays}
-                  </p>
-                </div>
+              <div>
+                <p className="text-sm text-gray-600 font-poppins">
+                  Total Days
+                </p>
+                <p className="text-xl font-bold text-gray-800 font-poppins">
+                  {dashboardData.totalDays}
+                </p>
               </div>
             </div>
+            <button
+              onClick={()=>navigate("/attendance-overview?filter=total")}
+              className="w-full text-white py-3 rounded-2xl font-medium mt-4 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary"
+            >
+              <span>View Students</span>
+            </button>
+
+
           </div>
         </div>
+        <AttendanceInterface />
       </div>
     </div>
   );

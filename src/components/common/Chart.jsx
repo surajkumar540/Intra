@@ -15,7 +15,7 @@ const ChartComponent = () => {
 
   // Sample dashboard data - replace with your actual data
   const dashboardData = {
-    attendancePercentage: 75
+    attendancePercentage: 22
   };
 
   // Chart.js data configuration

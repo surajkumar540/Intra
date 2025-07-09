@@ -95,7 +95,7 @@ export default function MeetingsDashboard() {
   const [meetings, setMeetings] = useState(meetingsData);
   const primaryColor = "#FE697D";
 
-  
+
   const filteredMeetings = meetings.filter((meeting) => {
     const content = meeting.details
       .map(([, v]) => v)
@@ -217,10 +217,10 @@ export default function MeetingsDashboard() {
               </div>
               {meeting.type === "group" && (
                 <div className="flex gap-3">
-                  <button className="flex-1 py-2 px-4 bg-green-50 text-green-600 rounded-[8px] text-sm font-medium border border-green-200 hover:bg-green-100">
+                  <button className="flex-1 py-2 px-4 bg-green-50 text-green-600 rounded-[8px] text-sm font-medium border border-green-200 hover:bg-green-100" onClick={() => navigate("/invite-form")}>
                     Reschedule
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleCancelClick(index)}
                     className="flex-1 py-2 px-4 bg-red-50 text-red-600 rounded-[8px] text-sm font-medium border border-red-200 hover:bg-red-100"
                   >
