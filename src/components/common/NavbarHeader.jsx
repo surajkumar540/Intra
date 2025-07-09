@@ -54,7 +54,7 @@ const NavbarHeader = ({
           {showArrow && (
             <button
               onClick={onArrowClick}
-              className="p-1 hover:bg-white hover:bg-opacity-10 rounded-full transition-colors shrink-0"
+              className="p-1"
               aria-label="Go back"
             >
               <ChevronLeft className="w-6 h-6" />
