@@ -17,7 +17,7 @@ import AttendanceOverview from "../pages/dashboard/AttendanceOverview";
 import InviteForm from "../pages/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
 import AttendanceTracker from "../pages/dashboard/reports/AttendanceTracker";
-import OtpInput from "../pages/auth/OtpInput";
+import OtpInput from "../pages/auth/OtpInput.jsx";
 import SetNewPassword from "../pages/auth/SetNewPassword";
 
 
