@@ -5,7 +5,7 @@ import {
   ChevronRight,
   MapPin,
 } from "lucide-react";
-import TimePicker from "../../../components/common/TimePicker";
+import TimePicker from "../../components/Inputs/TimePicker";
 
 export default function SingleInviteForm({
   formData,

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import OtpInput from "./OtpInput";
+import OtpField from "../../components/OTP/OtpField";
 
-const VerifyOTP = () => {
+const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const location = useLocation();
   const navigate = useNavigate();
-
 
   // ✅ Get email from location.state
   const email = location.state?.email;
@@ -16,7 +15,6 @@ const VerifyOTP = () => {
       navigate("/forgot-password");
     }
   }, [email, navigate]);
-
 
   //   useEffect(() => {
   //     if (!email) {
@@ -43,13 +41,14 @@ const VerifyOTP = () => {
       <div className="max-w-sm w-full space-y-6">
         <h1 className="text-xl font-semibold text-center">Enter OTP</h1>
 
-        <OtpInput otp={otp} setOtp={setOtp} email={email} />
+        <OtpField otp={otp} setOtp={setOtp} email={email} />
 
         <button
           onClick={handleVerify}
           disabled={!isComplete}
-          className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${isComplete ? "bg-primary" : "bg-primary/40 cursor-not-allowed"
-            }`}
+          className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${
+            isComplete ? "bg-primary" : "bg-primary/40 cursor-not-allowed"
+          }`}
         >
           Verify Code
         </button>
@@ -58,4 +57,4 @@ const VerifyOTP = () => {
   );
 };
 
-export default VerifyOTP;
+export default VerifyOtp;

@@ -1,7 +1,7 @@
 import { Download, Share2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import NavbarHeader from "../../../components/layout/NavbarHeader";
+import NavbarHeader from "../../components/Navbar/NavbarHeader";
 import { RiSearchLine } from "react-icons/ri";
 import { Phone, Edit } from "lucide-react";
 
@@ -18,21 +18,111 @@ const attendanceData = [
 
 // Sample student data - you can replace this with your actual data source
 const studentsData = [
-  { id: 1, name: "Aman Sharma", rollNo: "11", status: "Present", phone: "+91 9876543210" },
-  { id: 2, name: "Priya Singh", rollNo: "12", status: "Absent", phone: "+91 9876543211" },
-  { id: 3, name: "Rahul Kumar", rollNo: "13", status: "Present", phone: "+91 9876543212" },
-  { id: 4, name: "Sneha Patel", rollNo: "14", status: "Leave", phone: "+91 9876543213" },
-  { id: 5, name: "Vikash Gupta", rollNo: "15", status: "Present", phone: "+91 9876543214" },
-  { id: 6, name: "Anita Yadav", rollNo: "16", status: "Absent", phone: "+91 9876543215" },
-  { id: 7, name: "Rohit Verma", rollNo: "17", status: "Present", phone: "+91 9876543216" },
-  { id: 8, name: "Kavita Joshi", rollNo: "18", status: "Present", phone: "+91 9876543217" },
-  { id: 9, name: "Suresh Mehta", rollNo: "19", status: "Present", phone: "+91 9876543218" },
-  { id: 10, name: "Deepika Agarwal", rollNo: "20", status: "Absent", phone: "+91 9876543219" },
-  { id: 11, name: "Arjun Patel", rollNo: "21", status: "Present", phone: "+91 9876543220" },
-  { id: 12, name: "Meera Gupta", rollNo: "22", status: "Absent", phone: "+91 9876543221" },
-  { id: 13, name: "Karan Singh", rollNo: "23", status: "Present", phone: "+91 9876543222" },
-  { id: 14, name: "Ritu Sharma", rollNo: "24", status: "Leave", phone: "+91 9876543223" },
-  { id: 15, name: "Amit Kumar", rollNo: "25", status: "Present", phone: "+91 9876543224" },
+  {
+    id: 1,
+    name: "Aman Sharma",
+    rollNo: "11",
+    status: "Present",
+    phone: "+91 9876543210",
+  },
+  {
+    id: 2,
+    name: "Priya Singh",
+    rollNo: "12",
+    status: "Absent",
+    phone: "+91 9876543211",
+  },
+  {
+    id: 3,
+    name: "Rahul Kumar",
+    rollNo: "13",
+    status: "Present",
+    phone: "+91 9876543212",
+  },
+  {
+    id: 4,
+    name: "Sneha Patel",
+    rollNo: "14",
+    status: "Leave",
+    phone: "+91 9876543213",
+  },
+  {
+    id: 5,
+    name: "Vikash Gupta",
+    rollNo: "15",
+    status: "Present",
+    phone: "+91 9876543214",
+  },
+  {
+    id: 6,
+    name: "Anita Yadav",
+    rollNo: "16",
+    status: "Absent",
+    phone: "+91 9876543215",
+  },
+  {
+    id: 7,
+    name: "Rohit Verma",
+    rollNo: "17",
+    status: "Present",
+    phone: "+91 9876543216",
+  },
+  {
+    id: 8,
+    name: "Kavita Joshi",
+    rollNo: "18",
+    status: "Present",
+    phone: "+91 9876543217",
+  },
+  {
+    id: 9,
+    name: "Suresh Mehta",
+    rollNo: "19",
+    status: "Present",
+    phone: "+91 9876543218",
+  },
+  {
+    id: 10,
+    name: "Deepika Agarwal",
+    rollNo: "20",
+    status: "Absent",
+    phone: "+91 9876543219",
+  },
+  {
+    id: 11,
+    name: "Arjun Patel",
+    rollNo: "21",
+    status: "Present",
+    phone: "+91 9876543220",
+  },
+  {
+    id: 12,
+    name: "Meera Gupta",
+    rollNo: "22",
+    status: "Absent",
+    phone: "+91 9876543221",
+  },
+  {
+    id: 13,
+    name: "Karan Singh",
+    rollNo: "23",
+    status: "Present",
+    phone: "+91 9876543222",
+  },
+  {
+    id: 14,
+    name: "Ritu Sharma",
+    rollNo: "24",
+    status: "Leave",
+    phone: "+91 9876543223",
+  },
+  {
+    id: 15,
+    name: "Amit Kumar",
+    rollNo: "25",
+    status: "Present",
+    phone: "+91 9876543224",
+  },
 ];
 
 const AttendanceTracker = () => {
@@ -48,7 +138,7 @@ const AttendanceTracker = () => {
   // Get filter from URL params
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const typeParam = urlParams.get('type');
+    const typeParam = urlParams.get("type");
 
     if (typeParam) {
       setCurrentFilter(typeParam);
@@ -56,12 +146,16 @@ const AttendanceTracker = () => {
 
       // Filter students based on the type
       let filtered = [];
-      if (typeParam === 'present') {
-        filtered = studentsData.filter(student => student.status === 'Present');
-      } else if (typeParam === 'absent') {
-        filtered = studentsData.filter(student => student.status === 'Absent');
-      } else if (typeParam === 'leave') {
-        filtered = studentsData.filter(student => student.status === 'Leave');
+      if (typeParam === "present") {
+        filtered = studentsData.filter(
+          (student) => student.status === "Present"
+        );
+      } else if (typeParam === "absent") {
+        filtered = studentsData.filter(
+          (student) => student.status === "Absent"
+        );
+      } else if (typeParam === "leave") {
+        filtered = studentsData.filter((student) => student.status === "Leave");
       }
 
       setFilteredStudents(filtered);
@@ -69,9 +163,10 @@ const AttendanceTracker = () => {
   }, [location.search]);
 
   // Filter students based on search term
-  const searchFilteredStudents = filteredStudents.filter(student =>
-    student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.rollNo.toLowerCase().includes(searchTerm.toLowerCase())
+  const searchFilteredStudents = filteredStudents.filter(
+    (student) =>
+      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.rollNo.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleClick = (day, type) => {
@@ -113,11 +208,11 @@ const AttendanceTracker = () => {
     if (!currentFilter) return "Reports";
 
     switch (currentFilter) {
-      case 'present':
+      case "present":
         return "Present ";
-      case 'absent':
+      case "absent":
         return "Absent ";
-      case 'leave':
+      case "leave":
         return "  Leave";
       default:
         return "Reports";
@@ -183,12 +278,17 @@ const AttendanceTracker = () => {
             </div>
 
             {/* Students List */}
-            <div className="space-y-3 overflow-y-auto" style={{ maxHeight: "calc(100vh - 200px)" }}>
+            <div
+              className="space-y-3 overflow-y-auto"
+              style={{ maxHeight: "calc(100vh - 200px)" }}
+            >
               {searchFilteredStudents.length > 0 ? (
                 searchFilteredStudents.map((student) => (
                   <div
                     key={student.id}
-                    className={`bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow ${getBorderStyle(student.status)}`}
+                    className={`bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow ${getBorderStyle(
+                      student.status
+                    )}`}
                   >
                     <div className="flex items-center space-x-3">
                       {/* Avatar */}
@@ -204,12 +304,14 @@ const AttendanceTracker = () => {
                       {/* Student Info */}
                       <div>
                         <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
-                          Name - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                          Name -{" "}
+                          <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
                             {student.name}
                           </span>
                         </p>
                         <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
-                          Roll No. - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                          Roll No. -{" "}
+                          <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
                             {student.rollNo}
                           </span>
                         </p>
@@ -273,10 +375,11 @@ const AttendanceTracker = () => {
                   <div className="flex gap-4 flex-1 justify-center">
                     <button
                       onClick={() => handleClick(item.day, "present")}
-                      className={`h-[52px] w-[81px] p-2 border border-[#227749] rounded-[18px] text-[#227749] text-[12px] font-medium text-center leading-[100%] font-poppins ${clicked[`${item.day}-present`]
+                      className={`h-[52px] w-[81px] p-2 border border-[#227749] rounded-[18px] text-[#227749] text-[12px] font-medium text-center leading-[100%] font-poppins ${
+                        clicked[`${item.day}-present`]
                           ? "bg-[#22774933]"
                           : "bg-[#2277491A]"
-                        }`}
+                      }`}
                     >
                       ({item.present})<br />
                       Present
@@ -284,20 +387,22 @@ const AttendanceTracker = () => {
 
                     <button
                       onClick={() => handleClick(item.day, "absent")}
-                      className={`h-[52px] w-[81px] p-2 border border-[#FE697D] rounded-[16px] text-[#FE697D] text-[12px] font-medium text-center leading-[100%] font-poppins ${clicked[`${item.day}-absent`]
+                      className={`h-[52px] w-[81px] p-2 border border-[#FE697D] rounded-[16px] text-[#FE697D] text-[12px] font-medium text-center leading-[100%] font-poppins ${
+                        clicked[`${item.day}-absent`]
                           ? "bg-[#FE697D33]"
                           : "bg-[#FE697D1A]"
-                        }`}
+                      }`}
                     >
                       ({item.absent}) <br /> Absent
                     </button>
 
                     <button
                       onClick={() => handleClick(item.day, "leave")}
-                      className={`w-[81px] h-[52px] p-2 border border-[#394089] rounded-[16px] text-[#394089] text-[12px] font-medium text-center leading-[100%] font-poppins ${clicked[`${item.day}-leave`]
+                      className={`w-[81px] h-[52px] p-2 border border-[#394089] rounded-[16px] text-[#394089] text-[12px] font-medium text-center leading-[100%] font-poppins ${
+                        clicked[`${item.day}-leave`]
                           ? "bg-[#39408933]"
                           : "bg-[#3940891A]"
-                        }`}
+                      }`}
                     >
                       ({item.leave}) <br /> Leave
                     </button>

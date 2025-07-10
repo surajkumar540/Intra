@@ -5,7 +5,6 @@ import {
   Phone,
   Edit,
   Share2,
-  Settings,
   ChevronRight,
   X,
   Copy,
@@ -14,13 +13,10 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Save,
-  User,
-  Hash,
   Download,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import NavbarHeader from "../../components/layout/NavbarHeader";
+import NavbarHeader from "../../components/Navbar/NavbarHeader";
 
 const AttendanceOverview = () => {
   const navigate = useNavigate();
@@ -28,21 +24,21 @@ const AttendanceOverview = () => {
 
   // Get filter parameter from URL
   const urlParams = new URLSearchParams(location.search);
-  const urlFilter = urlParams.get('filter');
+  const urlFilter = urlParams.get("filter");
 
   // Initialize selectedFilter based on URL parameter
   const [selectedFilter, setSelectedFilter] = useState(() => {
     // Map URL filter values to display values
     const filterMap = {
-      'present': 'Present',
-      'absent': 'Absent',
-      'leave': 'Leave',
-      'total': 'Total',
-      'upcoming': 'Total', // Default to Total for upcoming
-      'previous': 'Total'   // Default to Total for previous
+      present: "Present",
+      absent: "Absent",
+      leave: "Leave",
+      total: "Total",
+      upcoming: "Total", // Default to Total for upcoming
+      previous: "Total", // Default to Total for previous
     };
 
-    return filterMap[urlFilter?.toLowerCase()] || 'Total';
+    return filterMap[urlFilter?.toLowerCase()] || "Total";
   });
 
   const [selectedDate, setSelectedDate] = useState("2025-06-01");
@@ -61,15 +57,15 @@ const AttendanceOverview = () => {
   // Update filter when URL changes
   useEffect(() => {
     const filterMap = {
-      'present': 'Present',
-      'absent': 'Absent',
-      'leave': 'Leave',
-      'total': 'Total',
-      'upcoming': 'Total',
-      'previous': 'Total'
+      present: "Present",
+      absent: "Absent",
+      leave: "Leave",
+      total: "Total",
+      upcoming: "Total",
+      previous: "Total",
     };
 
-    const newFilter = filterMap[urlFilter?.toLowerCase()] || 'Total';
+    const newFilter = filterMap[urlFilter?.toLowerCase()] || "Total";
     setSelectedFilter(newFilter);
   }, [urlFilter]);
 
@@ -175,7 +171,7 @@ const AttendanceOverview = () => {
 
     // Update URL parameter
     const newParams = new URLSearchParams(location.search);
-    newParams.set('filter', filter.toLowerCase());
+    newParams.set("filter", filter.toLowerCase());
     navigate(`${location.pathname}?${newParams.toString()}`, { replace: true });
   };
 
@@ -383,7 +379,6 @@ const AttendanceOverview = () => {
           <div className="bg-white  mb-4 relative w-full ">
             <div
               className="flex items-center gap-4 cursor-pointer w-full h-[56px] rounded-[16px] border border-[#0000001A] px-6 py-4 shadow-[0px_2px_8px_0px_rgba(99,99,99,0.2)]"
-
               onClick={() => setShowCalendar(!showCalendar)}
             >
               <Calendar className="w-5 h-5 font-medium text-black/50" />
@@ -439,18 +434,21 @@ const AttendanceOverview = () => {
                         disabled={!day}
                         className={`
                                                     h-8 w-8 text-sm rounded-full flex items-center justify-center
-                                                    ${day
-                            ? "hover:bg-gray-100 cursor-pointer"
-                            : "cursor-default"
-                          }
-                                                    ${isSelectedDate(day)
-                            ? "text-white font-medium"
-                            : "text-gray-700"
-                          }
-                                                    ${day
-                            ? "hover:bg-opacity-80"
-                            : ""
-                          }
+                                                    ${
+                                                      day
+                                                        ? "hover:bg-gray-100 cursor-pointer"
+                                                        : "cursor-default"
+                                                    }
+                                                    ${
+                                                      isSelectedDate(day)
+                                                        ? "text-white font-medium"
+                                                        : "text-gray-700"
+                                                    }
+                                                    ${
+                                                      day
+                                                        ? "hover:bg-opacity-80"
+                                                        : ""
+                                                    }
                                                 `}
                         style={{
                           backgroundColor: isSelectedDate(day)
@@ -497,10 +495,11 @@ const AttendanceOverview = () => {
               <button
                 key={filter}
                 onClick={() => handleFilterChange(filter)}
-                className={`w-[89px] h-[44px] p-2 rounded-[30px] text-sm font-medium text-center transition-all text-[12px] leading-[100%] tracking-[0] font-poppins ${selectedFilter === filter
-                  ? "text-white"
-                  : "outline outline-1 text-black/50"
-                  }`}
+                className={`w-[89px] h-[44px] p-2 rounded-[30px] text-sm font-medium text-center transition-all text-[12px] leading-[100%] tracking-[0] font-poppins ${
+                  selectedFilter === filter
+                    ? "text-white"
+                    : "outline outline-1 text-black/50"
+                }`}
                 style={{
                   backgroundColor:
                     selectedFilter === filter ? "#FE697D" : "transparent",
@@ -544,7 +543,10 @@ const AttendanceOverview = () => {
               return (
                 <div
                   key={student.id}
-                  className={`bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow border ${getBorderStyle(student.status, selectedFilter)}`}
+                  className={`bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow border ${getBorderStyle(
+                    student.status,
+                    selectedFilter
+                  )}`}
                 >
                   <div className="flex items-center space-x-3">
                     {/* Avatar */}
@@ -560,13 +562,15 @@ const AttendanceOverview = () => {
                     {/* Student Info */}
                     <div>
                       <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
-                        Name - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                        Name -{" "}
+                        <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
                           {student.name}
                         </span>
                       </p>
 
                       <p className="font-semibold text-gray-800 text-[12px] leading-[24px] tracking-[0] font-poppins">
-                        Roll No. - <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
+                        Roll No. -{" "}
+                        <span className="font-medium text-[12px] leading-[24px] tracking-[0] font-poppins">
                           {student.rollNo}
                         </span>
                       </p>
@@ -644,7 +648,6 @@ const AttendanceOverview = () => {
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

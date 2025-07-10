@@ -1,14 +1,15 @@
 import { useState } from "react";
-import WelcomeFlow from "./WelcomeFlow";
+import WelcomeFlow from "../Onboarding/WelcomeFlow";
 import smartImg from "../../assets/unofficial/smart-attendance.png";
 import parentImg from "../../assets/unofficial/parent-communication.png";
 import reportImg from "../../assets/unofficial/student-reports.png";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 const slides = [
   {
     image: smartImg,
     title: "Smart Attendance  Tracking",
-    description: "Easily mark and manage student attendance <br>in just a few taps.",
+    description:
+      "Easily mark and manage student attendance <br>in just a few taps.",
   },
   {
     image: parentImg,
@@ -29,7 +30,7 @@ const WelcomeScreen = () => {
     if (index < slides.length - 1) {
       setIndex(index + 1);
     } else {
-      navigate("/login")
+      navigate("/login");
     }
   };
 

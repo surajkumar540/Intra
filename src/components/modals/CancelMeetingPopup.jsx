@@ -11,10 +11,7 @@ const CancelMeetingPopup = ({ isOpen, onClose, onConfirm, showSuccess }) => {
         setReason(""); // Reset reason after confirmation
     };
 
-    const handleClose = () => {
-        setReason(""); // Reset reason when closing
-        onClose();
-    };
+   
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">

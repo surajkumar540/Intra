@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function OtpInput() {
+function OtpField() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -12,7 +12,7 @@ function OtpInput() {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [verified, setVerified] = useState(false);
+  // const [verified, setVerified] = useState(false);
   const inputRefs = useRef([]);
 
   useEffect(() => {
@@ -115,13 +115,15 @@ function OtpInput() {
       */
 
       // For demonstration, we'll simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Simulate success/failure (remove this in production)
       if (otpValue === "12345") {
         console.log("OTP verified successfully!");
-        navigate("/set-new-password", { state: { email: location.state?.email } });
-        setVerified(true);
+        navigate("/set-new-password", {
+          state: { email: location.state?.email },
+        });
+        // setVerified(true);
       } else {
         throw new Error("Invalid OTP");
       }
@@ -155,7 +157,7 @@ function OtpInput() {
       */
 
       // For demonstration, we'll simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       console.log("OTP resent successfully!");
       alert("OTP has been resent to your email!");
@@ -215,10 +217,11 @@ function OtpInput() {
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
                     disabled={isLoading}
-                    className={`w-14 h-14 text-center text-2xl font-semibold border-2 rounded-lg focus:outline-none transition-colors duration-200 focus:ring-0 focus:ring-offset-0 ${error
-                      ? "border-red-300 focus:border-red-500"
-                      : "border-gray-200 focus:border-primary hover:border-gray-300"
-                      } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                    className={`w-14 h-14 text-center text-2xl font-semibold border-2 rounded-lg focus:outline-none transition-colors duration-200 focus:ring-0 focus:ring-offset-0 ${
+                      error
+                        ? "border-red-300 focus:border-red-500"
+                        : "border-gray-200 focus:border-primary hover:border-gray-300"
+                    } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     style={{
                       WebkitAppearance: "none",
                       MozAppearance: "textfield",
@@ -263,7 +266,7 @@ function OtpInput() {
                     boxSizing: "border-box",
                   }}
                 >
-                 Resend email
+                  Resend email
                 </button>
               </div>
             </div>
@@ -274,4 +277,4 @@ function OtpInput() {
   );
 }
 
-export default OtpInput;
+export default OtpField;

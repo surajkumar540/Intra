@@ -2,9 +2,9 @@ import { Download, Share2 } from "lucide-react";
 import { useState } from "react";
 import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../layout/NavbarHeader"
-import { CalendarComponent } from "../common/CalendarComponent";
-import CancelMeetingPopup from "../modals/CancelMeetingPopup";
+import NavbarHeader from "../../components/Navbar/NavbarHeader";
+import CalendarComponent from "../../components/Calendar/CalendarComponent";
+import CancelMeetingPopup from "../../components/Modals/CancelMeetingPopup";
 
 const meetingsData = [
   {
@@ -99,7 +99,6 @@ export default function MeetingsDashboard() {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [meetingToCancel, setMeetingToCancel] = useState(null);
   const [meetings, setMeetings] = useState(meetingsData);
-  const primaryColor = "#FE697D";
 
   // Function to get status badge styling
   const getStatusBadge = (status) => {
@@ -108,32 +107,34 @@ export default function MeetingsDashboard() {
         text: "Upcoming",
         bgColor: "bg-blue-50",
         textColor: "text-blue-600",
-        borderColor: "border-blue-200"
+        borderColor: "border-blue-200",
       },
       visited: {
         text: "Visited",
         bgColor: "bg-green-50",
         textColor: "text-green-600",
-        borderColor: "border-green-200"
+        borderColor: "border-green-200",
       },
       canceled: {
         text: "Canceled",
         bgColor: "bg-red-50",
         textColor: "text-red-600",
-        borderColor: "border-red-200"
+        borderColor: "border-red-200",
       },
       rescheduled: {
         text: "Rescheduled",
         bgColor: "bg-orange-50",
         textColor: "text-orange-600",
-        borderColor: "border-orange-200"
-      }
+        borderColor: "border-orange-200",
+      },
     };
 
     const config = statusConfig[status] || statusConfig.upcoming;
 
     return (
-      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${config.bgColor} ${config.textColor} ${config.borderColor}`}>
+      <span
+        className={`px-2 py-1 rounded-full text-xs font-medium border ${config.bgColor} ${config.textColor} ${config.borderColor}`}
+      >
         {config.text}
       </span>
     );
@@ -161,31 +162,15 @@ export default function MeetingsDashboard() {
     }
   };
 
-  // Cancel meeting handlers
-  const handleCancelClick = (meetingIndex) => {
-    setMeetingToCancel(meetingIndex);
-    setShowCancelPopup(true);
-  };
-
   const handleCancelConfirm = () => {
     // Update the meeting status to canceled instead of removing it
-    setMeetings(prev => prev.map((meeting, index) =>
-      index === meetingToCancel
-        ? { ...meeting, status: "canceled" }
-        : meeting
-    ));
+    setMeetings((prev) =>
+      prev.map((meeting, index) =>
+        index === meetingToCancel ? { ...meeting, status: "canceled" } : meeting
+      )
+    );
     setShowCancelPopup(false);
     setShowSuccessPopup(true);
-  };
-
-  const handleReschedule = (meetingIndex) => {
-    // Update the meeting status to rescheduled
-    setMeetings(prev => prev.map((meeting, index) =>
-      index === meetingIndex
-        ? { ...meeting, status: "rescheduled" }
-        : meeting
-    ));
-    navigate("/invite-form");
   };
 
   const handlePopupClose = () => {
@@ -277,8 +262,6 @@ export default function MeetingsDashboard() {
                   </div>
                 ))}
               </div>
-
-
             </div>
           ))}
         </div>

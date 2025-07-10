@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import { ClockFading, CircleUser, Plus, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../../components/layout/NavbarHeader"; // Import the reusable navbar
-import { CalendarComponent } from "../../components/common/CalendarComponent";
+import NavbarHeader from "../../components/Navbar/NavbarHeader"; // Import the reusable navbar
+import CalendarComponent from "../../components/Calendar/CalendarComponent";
+import AttendanceInterface from "../../pages/dashboard/AttendanceInterface";
 import entraLogo from "../../assets/offical/entraLogo.png";
-import ChartComponent from "../../components/common/Chart";
-import AttendanceInterface from "./AttendanceInterface"
+import ChartComponent from "../../components/Charts/Chart";
 
 export default function MainDashboard() {
   const navigate = useNavigate();
@@ -128,7 +128,6 @@ export default function MainDashboard() {
               {/* Upcoming Meetings */}
               <div
                 className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all font-semibold text-sm relative overflow-hidden w-full sm:min-w-[165px] sm:max-w-[165px] min-h-[171px] bg-dual-gradient"
-
                 onClick={() => navigate("/upcoming-meetings")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 opacity-100"></div>
@@ -265,7 +264,6 @@ export default function MainDashboard() {
 
               <div
                 className="rounded-xl p-4 text-white cursor-pointer hover:opacity-90 transition-all relative overflow-hidden bg-dual-gradient"
-
                 onClick={() => handleRedirect("total")}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20"></div>
@@ -282,14 +280,12 @@ export default function MainDashboard() {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Attendance Section */}
         <div className="pt-4 w-full">
           <div className="w-full">
             <div className="bg-gray-50 rounded-2xl p-6 w-full">
-
               <div className="flex items-center justify-between w-full">
                 <h2 className="text-lg font-semibold text-gray-800 font-poppins">
                   Attendance
@@ -298,7 +294,6 @@ export default function MainDashboard() {
 
               <ChartComponent />
             </div>
-
 
             <div className="grid grid-cols-2 gap-4 text-center pt-2">
               <div>
@@ -310,9 +305,7 @@ export default function MainDashboard() {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600 font-poppins">
-                  Total Days
-                </p>
+                <p className="text-sm text-gray-600 font-poppins">Total Days</p>
                 <p className="text-xl font-bold text-gray-800 font-poppins">
                   {dashboardData.totalDays}
                 </p>
@@ -324,8 +317,6 @@ export default function MainDashboard() {
             >
               <span>View Students</span>
             </button>
-
-
           </div>
         </div>
         <AttendanceInterface />

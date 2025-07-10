@@ -1,5 +1,5 @@
 import { IoIosArrowForward } from "react-icons/io";
-import ProgressDots from "../../components/welcome/ProgressDot";
+import ProgressDots from "./components/ProgressDot";
 
 const WelcomeFlow = ({
   image,

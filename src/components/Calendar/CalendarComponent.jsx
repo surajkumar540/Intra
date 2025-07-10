@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 
-export const CalendarComponent = ({
+const CalendarComponent = ({
   selectedDate,
   onDateSelect,
   showCalendar,
@@ -166,3 +166,4 @@ export const CalendarComponent = ({
     </div>
   );
 };
+export default CalendarComponent;

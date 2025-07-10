@@ -8,18 +8,17 @@ import {
 import { useState, useEffect } from "react";
 
 // Pages
-import Login from "../pages/auth/Login";
-import Signup from "../pages/auth/Signup";
-import Dashboard from "../pages/auth/Dashboard";
-import WelcomeScreen from "../pages/welcome/WelcomeScreen";
-import ForgotPassword from "../pages/auth/ForgotPassword";
+import Login from "../features/Auth/Login";
+import WelcomeScreen from "../features/Onboarding/WelcomeScreen";
+import ForgotPassword from "../features/Auth/ForgotPassword";
+import VerifyOtp from "../features/Auth/VerifyOTP";
+import SetNewPassword from "../features/Auth/SetNewPassword";
+import Dashboard from "../features/Dashboard/Dashboard";
 import AttendanceOverview from "../pages/dashboard/AttendanceOverview";
-import InviteForm from "../pages/dashboard/invite/InviteForm";
-import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
-import AttendanceTracker from "../pages/dashboard/reports/AttendanceTracker";
-import OtpCompnent from "../pages/auth/OtpCompnent";
-import SetNewPassword from "../pages/auth/SetNewPassword";
-import PreviousMeetings from "../components/meetings/PreviousMeetings";
+import InviteForm from "../features/Meetings/InviteForm";
+import PreviousMeetings from "../features/Meetings/PreviousMeetings";
+import UpcomingMeetings from "../features/Meetings/UpcomingMeetings";
+import AttendanceTracker from "../features/Reports/AttendanceTracker";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -38,7 +37,6 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Public entry route */}
         <Route
           path="/"
           element={
@@ -49,7 +47,6 @@ const AppRoutes = () => {
           }
         />
 
-        {/* Welcome screen */}
         <Route
           path="/welcome"
           element={
@@ -61,7 +58,6 @@ const AppRoutes = () => {
           }
         />
 
-        {/* Authentication routes */}
         <Route
           path="/login"
           element={
@@ -74,34 +70,12 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="/signup"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <Signup setAuth={setIsAuthenticated} />
-            )
-          }
-        />
-
-        <Route
           path="/otp-verification"
           element={
             isAuthenticated ? (
               <Navigate to="/dashboard" replace />
             ) : (
-              <OtpCompnent />
-            )
-          }
-        />
-
-        <Route
-          path="/set-new-password"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <SetNewPassword />
+              <VerifyOtp />
             )
           }
         />
@@ -117,7 +91,17 @@ const AppRoutes = () => {
           }
         />
 
-        {/* Protected routes */}
+        <Route
+          path="/set-new-password"
+          element={
+            isAuthenticated ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <SetNewPassword />
+            )
+          }
+        />
+
         <Route
           path="/dashboard"
           element={
@@ -136,7 +120,6 @@ const AppRoutes = () => {
           }
         />
 
-        {/* InviteForm */}
         <Route
           path="/invite-form"
           element={
@@ -144,7 +127,6 @@ const AppRoutes = () => {
           }
         />
 
-        {/* UpcomingMeetings */}
         <Route
           path="/upcoming-meetings"
           element={
@@ -156,7 +138,6 @@ const AppRoutes = () => {
           }
         />
 
-        {/* PreviousMeetings */}
         <Route
           path="/previous-meetings"
           element={
@@ -168,9 +149,6 @@ const AppRoutes = () => {
           }
         />
 
-
-        {/* AttendanceTracker */}
-        {/* query params */}
         <Route
           path="/report"
           element={

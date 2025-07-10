@@ -2,9 +2,9 @@ import { Download, Share2 } from "lucide-react";
 import { useState } from "react";
 import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../layout/NavbarHeader"
-import { CalendarComponent } from "../common/CalendarComponent";
-import CancelMeetingPopup from "../modals/CancelMeetingPopup";
+import NavbarHeader from "../../components/Navbar/NavbarHeader";
+import CalendarComponent from "../../components/Calendar/CalendarComponent";
+import CancelMeetingPopup from "../../components/Modals/CancelMeetingPopup";
 
 const meetingsData = [
   {
@@ -93,8 +93,6 @@ export default function MeetingsDashboard() {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [meetingToCancel, setMeetingToCancel] = useState(null);
   const [meetings, setMeetings] = useState(meetingsData);
-  const primaryColor = "#FE697D";
-
 
   const filteredMeetings = meetings.filter((meeting) => {
     const content = meeting.details
@@ -126,7 +124,7 @@ export default function MeetingsDashboard() {
 
   const handleCancelConfirm = () => {
     // Remove the meeting from the list
-    setMeetings(prev => prev.filter((_, index) => index !== meetingToCancel));
+    setMeetings((prev) => prev.filter((_, index) => index !== meetingToCancel));
     setShowCancelPopup(false);
     setShowSuccessPopup(true);
   };
@@ -217,7 +215,10 @@ export default function MeetingsDashboard() {
               </div>
               {meeting.type === "group" && (
                 <div className="flex gap-3">
-                  <button className="flex-1 py-2 px-4 bg-green-50 text-green-600 rounded-[8px] text-sm font-medium border border-green-200 hover:bg-green-100" onClick={() => navigate("/invite-form")}>
+                  <button
+                    className="flex-1 py-2 px-4 bg-green-50 text-green-600 rounded-[8px] text-sm font-medium border border-green-200 hover:bg-green-100"
+                    onClick={() => navigate("/invite-form")}
+                  >
                     Reschedule
                   </button>
                   <button
