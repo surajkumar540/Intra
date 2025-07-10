@@ -13,7 +13,7 @@ import PublicRoute from "../components/common/PublicRoute";
 // Pages - Auth
 import Login from "../features/Auth/Login";
 import ForgotPassword from "../features/Auth/ForgotPassword";
-import VerifyOtp from "../features/Auth/VerifyOTP";
+import VerifyOtp from "../features/Auth/VerifyOtp";
 import SetNewPassword from "../features/Auth/SetNewPassword";
 
 // Pages - Onboarding
