@@ -5,13 +5,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 function OtpInput() {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Get email from location state
   const email = location.state?.email || "your email";
-  
+
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [verified, setVerified] = useState(false);
   const inputRefs = useRef([]);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ function OtpInput() {
       navigate("/forgot-password");
       return;
     }
-    
+
     // Focus first input on mount
     if (inputRefs.current[0]) {
       inputRefs.current[0].focus();
@@ -112,15 +113,15 @@ function OtpInput() {
       
       const data = await response.json();
       */
-      
+
       // For demonstration, we'll simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Simulate success/failure (remove this in production)
       if (otpValue === "12345") {
         console.log("OTP verified successfully!");
-        // Navigate to next step (e.g., reset password form)
-        navigate("/reset-password", { state: { email: location.state?.email } });
+        navigate("/set-new-password", { state: { email: location.state?.email } });
+        setVerified(true);
       } else {
         throw new Error("Invalid OTP");
       }
@@ -152,13 +153,13 @@ function OtpInput() {
         throw new Error('Failed to resend OTP');
       }
       */
-      
+
       // For demonstration, we'll simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       console.log("OTP resent successfully!");
       alert("OTP has been resent to your email!");
-      
+
       // Clear current OTP
       setOtp(["", "", "", "", ""]);
       // Focus first input
@@ -214,11 +215,10 @@ function OtpInput() {
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
                     disabled={isLoading}
-                    className={`w-14 h-14 text-center text-2xl font-semibold border-2 rounded-lg focus:outline-none transition-colors duration-200 focus:ring-0 focus:ring-offset-0 ${
-                      error
-                        ? "border-red-300 focus:border-red-500"
-                        : "border-gray-200 focus:border-primary hover:border-gray-300"
-                    } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                    className={`w-14 h-14 text-center text-2xl font-semibold border-2 rounded-lg focus:outline-none transition-colors duration-200 focus:ring-0 focus:ring-offset-0 ${error
+                      ? "border-red-300 focus:border-red-500"
+                      : "border-gray-200 focus:border-primary hover:border-gray-300"
+                      } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     style={{
                       WebkitAppearance: "none",
                       MozAppearance: "textfield",

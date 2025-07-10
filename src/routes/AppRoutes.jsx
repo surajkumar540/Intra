@@ -17,7 +17,9 @@ import AttendanceOverview from "../pages/dashboard/AttendanceOverview";
 import InviteForm from "../pages/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
 import AttendanceTracker from "../pages/dashboard/reports/AttendanceTracker";
-import OtpInput from "../pages/auth/OTPInput";
+import OtpInput from "../pages/auth/OtpInput";
+import SetNewPassword from "../pages/auth/SetNewPassword";
+
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -89,6 +91,17 @@ const AppRoutes = () => {
               <Navigate to="/dashboard" replace />
             ) : (
               <OtpInput />
+            )
+          }
+        />
+
+        <Route
+          path="/set-new-password"
+          element={
+            isAuthenticated ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <SetNewPassword />
             )
           }
         />
