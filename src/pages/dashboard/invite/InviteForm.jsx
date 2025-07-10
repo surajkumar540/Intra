@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Share2, Download } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../../common/NavbarHeader";
-import SuccessModal from "../../modals/SuccessModal";
+import NavbarHeader from "../../../components/layout/NavbarHeader";
+import SuccessModal from "../../../components/modals/SuccessModal";
 import SingleInviteForm from "./SingleInviteForm";
 import PTMInviteForm from "./PTMInviteForm";
 

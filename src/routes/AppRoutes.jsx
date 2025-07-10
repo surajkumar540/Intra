@@ -13,11 +13,11 @@ import Signup from "../pages/auth/Signup";
 import Dashboard from "../pages/auth/Dashboard";
 import WelcomeScreen from "../pages/welcome/WelcomeScreen";
 import ForgotPassword from "../pages/auth/ForgotPassword";
-import AttendanceOverview from "../components/dashboard/AttendanceOverview";
-import InviteForm from "../components/dashboard/invite/InviteForm";
+import AttendanceOverview from "../pages/dashboard/AttendanceOverview";
+import InviteForm from "../pages/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
-import AttendanceTracker from "../components/dashboard/reports/AttendanceTracker";
-import OtpInput from "../pages/auth/OtpInput";
+import AttendanceTracker from "../pages/dashboard/reports/AttendanceTracker";
+import OtpInput from "../pages/auth/OTPInput";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(

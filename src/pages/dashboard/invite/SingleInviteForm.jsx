@@ -5,9 +5,9 @@ import {
   ChevronRight,
   MapPin,
 } from "lucide-react";
-import TimePicker from "../../common/TimePicker";
+import TimePicker from "../../../components/common/TimePicker";
 
-export default function PTMInviteForm({
+export default function SingleInviteForm({
   formData,
   setFormData,
   errors,
@@ -139,95 +139,91 @@ export default function PTMInviteForm({
         <h2 className="text-gray-800 font-semibold text-lg">Invite Details</h2>
 
         <div>
-          <div className="flex gap-3">
-            {/* Student Roll No */}
-            <div className="relative">
-              <div className="relative">
-                <input
-                  type="number"
-                  value={formData.studentRollNo}
-                  onChange={(e) =>
-                    handleInputChange("studentRollNo", e.target.value)
-                  }
-                  onFocus={() => setShowStudentDropdown(true)}
-                  onBlur={() =>
-                    setTimeout(() => setShowStudentDropdown(false), 200)
-                  }
-                  className={`w-full   h-[41px] px-[20px] py-[10px]  rounded-[14px] focus:outline-none text-sm transition-all duration-200 border-2   ${
-                    errors.studentRollNo
-                      ? "border-primary focus:border-red-500"
-                      : "border-gray-300 focus:border-primary"
-                  }`}
-                  placeholder=" "
-                />
-                {!formData.studentRollNo && (
-                  <label className="absolute left-[20px] top-[35%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
-                    Student Roll No.<span className="text-red-500">*</span>
-                  </label>
-                )}
-              </div>
-
-              <ChevronDown className="absolute right-3 top-[20%] w-4 h-4 text-gray-400" />
-
-              {showStudentDropdown && (
-                <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
-                  {studentRollNumbers
-                    .filter((roll) => roll.includes(formData.studentRollNo))
-                    .map((roll) => (
-                      <div
-                        key={roll}
-                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
-                        onClick={() => {
-                          handleInputChange("studentRollNo", roll);
-                          setShowStudentDropdown(false);
-                        }}
-                      >
-                        {roll}
-                      </div>
-                    ))}
-                </div>
-              )}
-
-              {/* Reserve space for error message to prevent layout shift */}
-              <div className="min-h-[20px] ">
-                {errors.studentRollNo && (
-                  <p className="text-red-500 pb-4 pt-2 pl-1 text-xs animate-in fade-in duration-200">
-                    {errors.studentRollNo}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Student Name */}
+          {/* Student Roll No */}
+          <div className="relative">
             <div className="relative">
               <input
-                type="text"
-                value={formData.studentName}
+                type="number"
+                value={formData.studentRollNo}
                 onChange={(e) =>
-                  handleInputChange("studentName", e.target.value)
+                  handleInputChange("studentRollNo", e.target.value)
                 }
-                className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${
-                  errors.studentName
+                onFocus={() => setShowStudentDropdown(true)}
+                onBlur={() =>
+                  setTimeout(() => setShowStudentDropdown(false), 200)
+                }
+                className={`w-full  h-[41px] px-[20px] py-[10px]  rounded-[14px] focus:outline-none text-sm transition-all duration-200  border-2   ${
+                  errors.studentRollNo
                     ? "border-primary focus:border-red-500"
                     : "border-gray-300 focus:border-primary"
                 }`}
                 placeholder=" "
               />
-              {!formData.studentName && (
-                <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D] transition-all duration-200">
-                  Student Name
-                  <span className="pb-4 pt-1 pl-1 text-red-500">*</span>
+              {!formData.studentRollNo && (
+                <label className="absolute left-[20px] top-[35%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
+                  Student Roll No.<span className="text-red-500">*</span>
                 </label>
               )}
+            </div>
 
-              {/* Reserve space for error message to prevent layout shift */}
-              <div className="min-h-[20px] mt-1">
-                {errors.studentName && (
-                  <p className="pb-4 pt-1 pl-1 text-red-500 text-xs animate-in fade-in duration-200">
-                    {errors.studentName}
-                  </p>
-                )}
+            <ChevronDown className="absolute right-3 top-[20%] w-4 h-4 text-gray-400" />
+
+            {showStudentDropdown && (
+              <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-1 max-h-40 overflow-y-auto shadow-lg">
+                {studentRollNumbers
+                  .filter((roll) => roll.includes(formData.studentRollNo))
+                  .map((roll) => (
+                    <div
+                      key={roll}
+                      className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
+                      onClick={() => {
+                        handleInputChange("studentRollNo", roll);
+                        setShowStudentDropdown(false);
+                      }}
+                    >
+                      {roll}
+                    </div>
+                  ))}
               </div>
+            )}
+
+            {/* Reserve space for error message to prevent layout shift */}
+            <div className="min-h-[20px] ">
+              {errors.studentRollNo && (
+                <p className="text-red-500 pb-4 pt-2 pl-1 text-xs animate-in fade-in duration-200">
+                  {errors.studentRollNo}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Student Name */}
+          <div className="relative">
+            <input
+              type="text"
+              value={formData.studentName}
+              onChange={(e) => handleInputChange("studentName", e.target.value)}
+              className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] ${
+                errors.studentName
+                  ? "border-primary focus:border-red-500"
+                  : "border-gray-300 focus:border-primary"
+              }`}
+              placeholder=" "
+            />
+            {!formData.studentName && (
+              <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D] transition-all duration-200">
+                Student Name
+                <span className="pb-4 pt-1 pl-1 text-red-500">*</span>
+              </label>
+            )}
+
+            {/* Reserve space for error message to prevent layout shift */}
+            <div className="min-h-[20px] mt-1">
+              {errors.studentName && (
+                <p className="pb-4 pt-1 pl-1 text-red-500 text-xs animate-in fade-in duration-200">
+                  {errors.studentName}
+                </p>
+              )}
             </div>
           </div>
 
@@ -237,7 +233,7 @@ export default function PTMInviteForm({
               type="text"
               value={formData.hostName}
               onChange={(e) => handleInputChange("hostName", e.target.value)}
-              className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${
+              className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] ${
                 errors.hostName
                   ? "border-primary focus:border-red-500"
                   : "border-gray-300 focus:border-primary"
@@ -245,7 +241,7 @@ export default function PTMInviteForm({
               placeholder=" "
             />
             {!formData.hostName && (
-              <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
+              <label className="absolute left-[20px] top-[20%] transform  pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
                 Host Name<span className="pb-4 pt-1 pl-1 text-red-500">*</span>
               </label>
             )}
@@ -388,7 +384,7 @@ export default function PTMInviteForm({
               onChange={(e) =>
                 handleInputChange("meetingAgenda", e.target.value)
               }
-              className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${
+              className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] ${
                 errors.meetingAgenda
                   ? "border-primary focus:border-red-500"
                   : "border-gray-300 focus:border-primary"
@@ -396,7 +392,7 @@ export default function PTMInviteForm({
               placeholder=" "
             />
             {!formData.meetingAgenda && (
-              <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
+              <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
                 Meeting Agenda
                 <span className="pb-4 pt-1 pl-1 text-red-500">*</span>
               </label>
@@ -420,7 +416,7 @@ export default function PTMInviteForm({
               onChange={(e) => handleInputChange("meetingRoom", e.target.value)}
               onFocus={() => setShowRoomDropdown(true)}
               onBlur={() => setTimeout(() => setShowRoomDropdown(false), 200)}
-              className={`w-full h-[41px] px-[20px] py-[10px] border-2 rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] border-[#989898] ${
+              className={`w-full h-[41px] px-[20px] py-[10px] border-2  rounded-[14px] focus:outline-none text-sm transition-all duration-200 font-poppins text-[14px] leading-[100%] tracking-[0%] ${
                 errors.meetingRoom
                   ? "border-primary focus:border-red-500"
                   : "border-gray-300 focus:border-primary"
@@ -428,7 +424,7 @@ export default function PTMInviteForm({
               placeholder=" "
             />
             {!formData.meetingRoom && (
-              <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] border-[#989898] text-[#3333334D]">
+              <label className="absolute left-[20px] top-[20%] pointer-events-none font-poppins font-medium text-[14px] leading-[100%] tracking-[0%] text-[#3333334D]">
                 Meeting Room
                 <span className="pb-4 pt-1 pl-1 text-red-500">*</span>
               </label>

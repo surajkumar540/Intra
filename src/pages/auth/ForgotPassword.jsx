@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-
+  
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = () => {
     const newErrors = {};
@@ -19,17 +20,40 @@ const ForgetPassword = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleReset = (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
     if (!validateEmail()) return;
 
-    // Here you would typically make an API call to send the OTP
-    // For demonstration, we'll just navigate with the email
-
-    // Navigate to verification page with email in state
-    navigate("/otp-verification", {
-      state: { email: email },
-    });
+    setIsLoading(true);
+    
+    try {
+      // Here you would typically make an API call to send the OTP
+      // Example API call (replace with your actual endpoint):
+      /*
+      const response = await fetch('/api/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send OTP');
+      }
+      */
+      
+      // For demonstration, we'll simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Navigate to verification page with email in state
+      navigate("/otp-verification", { state: { email } });
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      setErrors({ email: "Failed to send OTP. Please try again." });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -52,33 +76,35 @@ const ForgetPassword = () => {
           </p>
         </div>
 
-        <form className="rounded-3xl  pt-6 space-y-5">
+        <form className="rounded-3xl pt-6 space-y-5" onSubmit={handleReset}>
           <div className="space-y-2">
             <label className="font-openSans font-semibold text-[16px] leading-[19.1px] tracking-[-0.48px]">
               Your Email
             </label>
 
-            <div className="relative ">
+            <div className="relative">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full px-4 py-3 pr-12  mb-6 border-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${
+                className={`w-full px-4 py-3 pr-12 mb-6 border-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${
                   errors.email
                     ? "border-red-300 focus:border-red-500"
                     : "border-gray-200 focus:border-primary"
                 }`}
                 placeholder="Enter your email"
+                disabled={isLoading}
               />
             </div>
             {errors.email && (
               <p className="text-sm text-red-500 mt-1">{errors.email}</p>
             )}
             <button
-              onClick={handleReset}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200"
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-primary hover:bg-primary/90 disabled:bg-primary/40 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200"
             >
-              Reset Password
+              {isLoading ? "Sending..." : "Reset Password"}
             </button>
           </div>
         </form>

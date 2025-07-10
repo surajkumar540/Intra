@@ -1,7 +1,7 @@
 import { Download, Share2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../../common/NavbarHeader";
+import NavbarHeader from "../../../components/layout/NavbarHeader";
 import { RiSearchLine } from "react-icons/ri";
 
 const attendanceData = [

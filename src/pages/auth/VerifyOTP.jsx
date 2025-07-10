@@ -7,9 +7,17 @@ const VerifyOTP = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get email from navigation state
+
+  // ✅ Get email from location.state
   const email = location.state?.email;
-  console.log(email, "emailllll");
+
+  useEffect(() => {
+    if (!email) {
+      navigate("/forgot-password");
+    }
+  }, [email, navigate]);
+
+
   //   useEffect(() => {
   //     if (!email) {
   //       navigate("/forgot-password");
@@ -40,9 +48,8 @@ const VerifyOTP = () => {
         <button
           onClick={handleVerify}
           disabled={!isComplete}
-          className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${
-            isComplete ? "bg-primary" : "bg-primary/40 cursor-not-allowed"
-          }`}
+          className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${isComplete ? "bg-primary" : "bg-primary/40 cursor-not-allowed"
+            }`}
         >
           Verify Code
         </button>

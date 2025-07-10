@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import { ClockFading, CircleUser, Plus, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../common/NavbarHeader"; // Import the reusable navbar
-import { CalendarComponent } from "../common/CalendarComponent";
+import NavbarHeader from "../../components/layout/NavbarHeader"; // Import the reusable navbar
+import { CalendarComponent } from "../../components/common/CalendarComponent";
 import entraLogo from "../../assets/offical/entraLogo.png";
-import ChartComponent from "../common/Chart";
+import ChartComponent from "../../components/common/Chart";
 import AttendanceInterface from "./AttendanceInterface"
 
 export default function MainDashboard() {

@@ -2,7 +2,7 @@ import { Download, Share2 } from "lucide-react";
 import { useState } from "react";
 import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../common/NavbarHeader";
+import NavbarHeader from "../layout/NavbarHeader"
 import { CalendarComponent } from "../common/CalendarComponent";
 import CancelMeetingPopup from "../modals/CancelMeetingPopup";
 

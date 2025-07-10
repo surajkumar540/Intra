@@ -20,7 +20,7 @@ import {
   Download,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import NavbarHeader from "../common/NavbarHeader";
+import NavbarHeader from "../../components/layout/NavbarHeader";
 
 const AttendanceOverview = () => {
   const navigate = useNavigate();
