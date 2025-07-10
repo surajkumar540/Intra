@@ -3,22 +3,36 @@ import {
   Routes,
   Route,
   Navigate,
-  useLocation,
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-// Pages
+// Components
+import ProtectedRoute from "../components/common/ProtectedRoute";
+import PublicRoute from "../components/common/PublicRoute";
+
+// Pages - Auth
 import Login from "../features/Auth/Login";
-import WelcomeScreen from "../features/Onboarding/WelcomeScreen";
 import ForgotPassword from "../features/Auth/ForgotPassword";
 import VerifyOtp from "../features/Auth/VerifyOTP";
 import SetNewPassword from "../features/Auth/SetNewPassword";
+
+// Pages - Onboarding
+import WelcomeScreen from "../features/Onboarding/WelcomeScreen";
+
+// Pages - Dashboard
 import Dashboard from "../features/Dashboard/Dashboard";
 import AttendanceOverview from "../pages/dashboard/AttendanceOverview";
+
+// Pages - Meetings
 import InviteForm from "../features/Meetings/InviteForm";
 import PreviousMeetings from "../features/Meetings/PreviousMeetings";
 import UpcomingMeetings from "../features/Meetings/UpcomingMeetings";
+
+// Pages - Reports
 import AttendanceTracker from "../features/Reports/AttendanceTracker";
+
+// 404 Page
+import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -37,6 +51,7 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
+        {/* Root Route */}
         <Route
           path="/"
           element={
@@ -47,135 +62,111 @@ const AppRoutes = () => {
           }
         />
 
+        {/* Public Routes - Only accessible when NOT authenticated */}
         <Route
           path="/welcome"
           element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
+            <PublicRoute isAuthenticated={isAuthenticated}>
               <WelcomeScreen />
-            )
+            </PublicRoute>
           }
         />
 
         <Route
           path="/login"
           element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
+            <PublicRoute isAuthenticated={isAuthenticated}>
               <Login setAuth={setIsAuthenticated} />
-            )
-          }
-        />
-
-        <Route
-          path="/otp-verification"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <VerifyOtp />
-            )
+            </PublicRoute>
           }
         />
 
         <Route
           path="/forgot-password"
           element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
+            <PublicRoute isAuthenticated={isAuthenticated}>
               <ForgotPassword />
-            )
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/otp-verification"
+          element={
+            <PublicRoute isAuthenticated={isAuthenticated}>
+              <VerifyOtp />
+            </PublicRoute>
           }
         />
 
         <Route
           path="/set-new-password"
           element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
+            <PublicRoute isAuthenticated={isAuthenticated}>
               <SetNewPassword />
-            )
+            </PublicRoute>
           }
         />
 
+        {/* Protected Routes - Only accessible when authenticated */}
         <Route
           path="/dashboard"
           element={
-            isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Dashboard />
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/attendance-overview"
           element={
-            isAuthenticated ? (
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
               <AttendanceOverview />
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/invite-form"
           element={
-            isAuthenticated ? <InviteForm /> : <Navigate to="/login" replace />
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <InviteForm />
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/upcoming-meetings"
           element={
-            isAuthenticated ? (
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
               <UpcomingMeetings />
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/previous-meetings"
           element={
-            isAuthenticated ? (
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
               <PreviousMeetings />
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/report"
           element={
-            isAuthenticated ? (
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
               <AttendanceTracker />
-            ) : (
-              <Navigate to="/login" replace />
-            )
+            </ProtectedRoute>
           }
         />
 
-        {/* Catch-all route */}
-        <Route
-          path="*"
-          element={<ProtectedRedirect isAuthenticated={isAuthenticated} />}
-        />
+        {/* 404 Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-  );
-};
-
-const ProtectedRedirect = ({ isAuthenticated }) => {
-  const location = useLocation();
-  return isAuthenticated ? (
-    <Navigate to="/dashboard" replace />
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 
