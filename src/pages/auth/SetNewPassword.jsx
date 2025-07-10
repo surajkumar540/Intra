@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { GoEyeClosed } from "react-icons/go";
 import { AiFillEye } from "react-icons/ai";
+import PasswordUpdateSuccess from "./PasswordUpdateSuccess";
 
 function SetNewPassword() {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ function SetNewPassword() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [updated, setUpdated] = useState(false);
+
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
@@ -86,10 +89,10 @@ function SetNewPassword() {
             await new Promise(resolve => setTimeout(resolve, 1500));
 
             console.log("Password reset successfully!");
-            alert("Password has been reset successfully!");
+            setUpdated(true);
+            localStorage.setItem("passwordUpdated", "true");
+            // navigate("/login");
 
-            // Navigate to login page
-            navigate("/login");
         } catch (error) {
             console.error("Password reset failed:", error);
             setErrors({ general: "Failed to reset password. Please try again." });
@@ -97,6 +100,14 @@ function SetNewPassword() {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        const isPasswordUpdated = localStorage.getItem("passwordUpdated");
+        if (isPasswordUpdated) {
+            navigate("/welcome");
+        }
+    }, [navigate]);
+
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -113,6 +124,10 @@ function SetNewPassword() {
             setErrors(prev => ({ ...prev, confirmPassword: "" }));
         }
     };
+
+    if (updated) {
+        return <PasswordUpdateSuccess />
+    }
 
     return (
         <div className="min-h-screen bg-white flex justify-center px-4 py-8">
@@ -159,8 +174,8 @@ function SetNewPassword() {
                                         onChange={handlePasswordChange}
                                         disabled={isLoading}
                                         className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.password
-                                                ? "border-red-300 focus:border-red-500"
-                                                : "border-gray-200 focus:border-primary"
+                                            ? "border-red-300 focus:border-red-500"
+                                            : "border-gray-200 focus:border-primary"
                                             } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                                         placeholder="Enter new password"
                                     />
@@ -196,8 +211,8 @@ function SetNewPassword() {
                                         onChange={handleConfirmPasswordChange}
                                         disabled={isLoading}
                                         className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.confirmPassword
-                                                ? "border-red-300 focus:border-red-500"
-                                                : "border-gray-200 focus:border-primary"
+                                            ? "border-red-300 focus:border-red-500"
+                                            : "border-gray-200 focus:border-primary"
                                             } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                                         placeholder="Confirm new password"
                                     />
@@ -268,7 +283,7 @@ function SetNewPassword() {
                                     minHeight: "48px",
                                 }}
                             >
-                                {isLoading ? "Resetting Password..." : "Reset Password"}
+                                {isLoading ? "Updating Password..." : updated ? "Password Updated" : "Update Password"}
                             </button>
                         </div>
                     </div>

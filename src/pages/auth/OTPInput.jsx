@@ -263,7 +263,7 @@ function OtpInput() {
                     boxSizing: "border-box",
                   }}
                 >
-                  {isLoading ? "Sending..." : "Resend email"}
+                 Resend email
                 </button>
               </div>
             </div>
