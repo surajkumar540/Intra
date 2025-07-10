@@ -138,31 +138,26 @@ export default function MeetingsDashboard() {
   return (
     <div className="flex items-center justify-center">
       <div className="w-full min-w-sm sm:max-w-sm bg-white min-h-screen">
-        <div
-          className="sticky top-0 z-10"
-          style={{ backgroundColor: "#FE697D" }}
-        >
-          <NavbarHeader
-            text="Upcoming Meetings"
-            showArrow={true}
-            onArrowClick={() => navigate("/dashboard")}
-            icons={[
-              {
-                icon: Share2,
-                onClick: () => console.log("Share clicked"),
-                label: "Share attendance",
-              },
-              {
-                icon: Download,
-                onClick: () => console.log("Download clicked"),
-                label: "Download",
-              },
-            ]}
-            textColor="text-white"
-            className="px-4  py-8"
-            style={{ height: "auto" }} // Override the default height
-          />
-        </div>
+        <NavbarHeader
+          text="Upcoming Meetings"
+          showArrow={true}
+          onArrowClick={() => navigate("/dashboard")}
+          icons={[
+            {
+              icon: Share2,
+              onClick: () => console.log("Share clicked"),
+              label: "Share attendance",
+            },
+            {
+              icon: Download,
+              onClick: () => console.log("Download clicked"),
+              label: "Download",
+            },
+          ]}
+          textColor="text-white"
+          className="px-4  py-8"
+          style={{ height: "auto" }} // Override the default height
+        />
 
         {/* Header */}
         <div className="flex items-center justify-between p-4 bg-white border-b border-gray-100">

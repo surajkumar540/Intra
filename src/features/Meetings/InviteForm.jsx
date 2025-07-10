@@ -203,10 +203,7 @@ Meeting Management System`;
     <div className="flex items-center justify-center">
       <div className="w-full min-w-sm sm:max-w-sm bg-white min-h-screen">
         {/* Header */}
-        <div
-          className="sticky top-0 z-10"
-          style={{ backgroundColor: "#FE697D" }}
-        >
+      
           <NavbarHeader
             text="Invite"
             showArrow={true}
@@ -227,7 +224,7 @@ Meeting Management System`;
             className="px-4  py-8"
             style={{ height: "auto" }}
           />
-        </div>
+        
 
         <div className="p-4 space-y-6 mx-auto">
           {/* Tab Selection */}

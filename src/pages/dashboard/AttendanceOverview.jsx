@@ -349,31 +349,26 @@ const AttendanceOverview = () => {
   return (
     <div className="flex items-center justify-center">
       <div className="w-full min-w-sm sm:max-w-sm bg-white min-h-screen">
-        <div
-          className="sticky top-0 z-10"
-          style={{ backgroundColor: "#FE697D" }}
-        >
-          <NavbarHeader
-            text="Overview"
-            showArrow={true}
-            onArrowClick={() => navigate("/dashboard")}
-            icons={[
-              {
-                icon: Share2,
-                onClick: handleShare,
-                label: "Share attendance",
-              },
-              {
-                icon: Download,
-                onClick: () => console.log("Download clicked"),
-                label: "Download",
-              },
-            ]}
-            textColor="text-white"
-            className="px-4  py-8"
-            style={{ height: "auto" }} // Override the default height
-          />
-        </div>
+        <NavbarHeader
+          text="Overview"
+          showArrow={true}
+          onArrowClick={() => navigate("/dashboard")}
+          icons={[
+            {
+              icon: Share2,
+              onClick: handleShare,
+              label: "Share attendance",
+            },
+            {
+              icon: Download,
+              onClick: () => console.log("Download clicked"),
+              label: "Download",
+            },
+          ]}
+          textColor="text-white"
+          className="px-4  py-8"
+          style={{ height: "auto" }} // Override the default height
+        />
         <div className="mt-6 px-6">
           {/* Date Selector */}
           <div className="bg-white  mb-4 relative w-full ">
