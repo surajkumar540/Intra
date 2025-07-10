@@ -241,6 +241,7 @@ export default function MeetingsDashboard() {
             Create Invite
           </Button>
         </div>
+        
 
         {/* Cancel Meeting Popup */}
         <CancelMeetingPopup
