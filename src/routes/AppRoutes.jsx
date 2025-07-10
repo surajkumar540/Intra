@@ -17,7 +17,7 @@ import AttendanceOverview from "../pages/dashboard/AttendanceOverview";
 import InviteForm from "../pages/dashboard/invite/InviteForm";
 import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
 import AttendanceTracker from "../pages/dashboard/reports/AttendanceTracker";
-// import OtpInput from "../pages/auth/OtpInput.jsx";
+import OtpCompnent from "../pages/auth/OtpCompnent";
 import SetNewPassword from "../pages/auth/SetNewPassword";
 
 
@@ -84,16 +84,16 @@ const AppRoutes = () => {
           }
         />
 
-        {/* <Route
+        <Route
           path="/otp-verification"
           element={
             isAuthenticated ? (
               <Navigate to="/dashboard" replace />
             ) : (
-              <OtpInput />
+              <OtpCompnent />
             )
           }
-        /> */}
+        />
 
         <Route
           path="/set-new-password"
