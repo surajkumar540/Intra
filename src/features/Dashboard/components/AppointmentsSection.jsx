@@ -2,6 +2,7 @@
 import React from "react";
 import { ClockFading, Plus } from "lucide-react";
 import AppointmentCard from "./AppointmentCard";
+import Button from "../../../components/UI/Button";
 
 const AppointmentsSection = ({
   upcomingMeetings,
@@ -13,7 +14,6 @@ const AppointmentsSection = ({
   return (
     <div className="w-full">
       <h2 className="text-lg font-semibold text-gray-800 mb-6">Appointments</h2>
-
       <div className="flex flex-row justify-center gap-4 w-full z-20">
         <AppointmentCard
           icon={ClockFading}
@@ -31,14 +31,14 @@ const AppointmentsSection = ({
           variant="secondary"
         />
       </div>
-
-      <button
+      <Button
         onClick={onCreateInvite}
         className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary"
+        icon={<Plus className="w-5 h-5" />}
+        iconPosition="right"
       >
-        <span>Create Invite</span>
-        <Plus className="w-5 h-5" />
-      </button>
+        Create Invite
+      </Button>
     </div>
   );
 };

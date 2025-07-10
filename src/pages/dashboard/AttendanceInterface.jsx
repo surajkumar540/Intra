@@ -59,7 +59,7 @@ export default function AttendanceInterface() {
     const presentCount = students.filter(s => s.status === 'studentWith80').length;
 
     return (
-        <div className="max-w-md mx-auto rounded-t-3xl mt-2 bg-gray-50 min-h-screen py-4 px-4">
+        <div className="max-w-md mx-auto rounded-t-3xl mt-2 bg-gray-50 py-4 px-4">
             <div className="flex justify-center gap-4 my-4">
                 <button
                     onClick={() => setActiveFilter('frequentAbsent')}

@@ -1,10 +1,12 @@
-import { Download, Share2 } from "lucide-react";
+import { Download, Plus, Search, Share2 } from "lucide-react";
 import { useState } from "react";
 import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../../components/Navbar/NavbarHeader";
 import CalendarComponent from "../../components/Calendar/CalendarComponent";
 import CancelMeetingPopup from "../../components/Modals/CancelMeetingPopup";
+import Button from "../../components/UI/Button";
+import SearchInput from "../../components/UI/SearchInput";
 
 const meetingsData = [
   {
@@ -179,12 +181,12 @@ export default function MeetingsDashboard() {
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <RiSearchLine className="text-gray-400 text-sm" />
             </div>
-            <input
-              type="text"
-              placeholder="Name/Roll No."
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border-none rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            <SearchInput
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Name/Roll No."
+              icon={<Search className="text-gray-400 w-4 h-4" />}
+              inputClassName="focus:ring-primary/20" // This overrides the default blue ring
             />
           </div>
         </div>
@@ -230,10 +232,14 @@ export default function MeetingsDashboard() {
 
         {/* Create Invite Button */}
         <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-white border-t border-gray-100">
-          <button className="w-full bg-primary hover:bg-secondary text-white py-3 px-6 rounded-[8px] font-medium flex items-center justify-center gap-2 shadow-lg">
-            <span>Create Invite</span>
-            <RiAddLine className="text-lg" />
-          </button>
+          <Button
+            onClick={() => navigate("/invite-form")}
+            className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary"
+            icon={<Plus className="w-5 h-5" />}
+            iconPosition="right"
+          >
+            Create Invite
+          </Button>
         </div>
 
         {/* Cancel Meeting Popup */}

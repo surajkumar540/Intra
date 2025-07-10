@@ -1,10 +1,11 @@
-import { Download, Share2 } from "lucide-react";
+import { Download, Search, Share2 } from "lucide-react";
 import { useState } from "react";
 import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../../components/Navbar/NavbarHeader";
 import CalendarComponent from "../../components/Calendar/CalendarComponent";
 import CancelMeetingPopup from "../../components/Modals/CancelMeetingPopup";
+import SearchInput from "../../components/UI/SearchInput";
 
 const meetingsData = [
   {
@@ -206,7 +207,7 @@ export default function MeetingsDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between p-4 bg-white border-b border-gray-100">
           <h1 className="text-lg font-semibold text-gray-900">
-            Upcoming Meetings
+            Previous Meetings
           </h1>
           {/* Reusable Calendar Component */}
           <CalendarComponent
@@ -218,20 +219,13 @@ export default function MeetingsDashboard() {
         </div>
 
         {/* Search Bar */}
-        <div className="p-4">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <RiSearchLine className="text-gray-400 text-sm" />
-            </div>
-            <input
-              type="text"
-              placeholder="Name/Roll No."
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border-none rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
+        <SearchInput
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Name/Roll No."
+          icon={<Search className="text-gray-400 w-4 h-4" />}
+          inputClassName="focus:ring-primary/20" // This overrides the default blue ring
+        />
 
         {/* Meeting Cards */}
         <div className="px-4 pb-24 space-y-4">

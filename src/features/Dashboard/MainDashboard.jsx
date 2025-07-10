@@ -1,4 +1,3 @@
-// 6. MainDashboard.jsx - Refactored main component
 import React, { useState } from "react";
 import { CircleUser, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
