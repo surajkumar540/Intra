@@ -19,7 +19,7 @@ import UpcomingMeetings from "../components/meetings/UpcomingMeetings";
 import AttendanceTracker from "../pages/dashboard/reports/AttendanceTracker";
 import OtpCompnent from "../pages/auth/OtpCompnent";
 import SetNewPassword from "../pages/auth/SetNewPassword";
-
+import PreviousMeetings from "../components/meetings/PreviousMeetings";
 
 const AppRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -155,6 +155,19 @@ const AppRoutes = () => {
             )
           }
         />
+
+        {/* PreviousMeetings */}
+        <Route
+          path="/previous-meetings"
+          element={
+            isAuthenticated ? (
+              <PreviousMeetings />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
 
         {/* AttendanceTracker */}
         {/* query params */}

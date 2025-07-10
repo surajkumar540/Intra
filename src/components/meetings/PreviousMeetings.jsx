@@ -2,8 +2,9 @@ import { Download, Share2 } from "lucide-react";
 import { useState } from "react";
 import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import NavbarHeader from "../common/NavbarHeader";
+import NavbarHeader from "../layout/NavbarHeader"
 import { CalendarComponent } from "../common/CalendarComponent";
+import CancelMeetingPopup from "../modals/CancelMeetingPopup";
 
 const meetingsData = [
   {
@@ -17,6 +18,7 @@ const meetingsData = [
       ["Meeting Agenda", "PTM"],
     ],
     type: "group",
+    status: "upcoming", // upcoming, visited, canceled, rescheduled
   },
   {
     title: "Single Invite",
@@ -30,6 +32,7 @@ const meetingsData = [
       ["Meeting Agenda", "Individual Discussion"],
     ],
     type: "single",
+    status: "visited",
   },
   {
     title: "PTM Invite",
@@ -42,6 +45,7 @@ const meetingsData = [
       ["Meeting Agenda", "Parent Feedback"],
     ],
     type: "group",
+    status: "canceled",
   },
   {
     title: "Single Invite",
@@ -55,6 +59,7 @@ const meetingsData = [
       ["Meeting Agenda", "Academic Progress"],
     ],
     type: "single",
+    status: "rescheduled",
   },
   {
     title: "PTM Invite",
@@ -67,6 +72,7 @@ const meetingsData = [
       ["Meeting Agenda", "Progress Review"],
     ],
     type: "group",
+    status: "upcoming",
   },
   {
     title: "Single Invite",
@@ -80,6 +86,7 @@ const meetingsData = [
       ["Meeting Agenda", "Behavioral Discussion"],
     ],
     type: "single",
+    status: "visited",
   },
 ];
 
@@ -88,8 +95,51 @@ export default function MeetingsDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState("2024-01-15");
   const [showCalendar, setShowCalendar] = useState(false);
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [meetingToCancel, setMeetingToCancel] = useState(null);
+  const [meetings, setMeetings] = useState(meetingsData);
+  const primaryColor = "#FE697D";
 
-  const filteredMeetings = meetingsData.filter((meeting) => {
+  // Function to get status badge styling
+  const getStatusBadge = (status) => {
+    const statusConfig = {
+      upcoming: {
+        text: "Upcoming",
+        bgColor: "bg-blue-50",
+        textColor: "text-blue-600",
+        borderColor: "border-blue-200"
+      },
+      visited: {
+        text: "Visited",
+        bgColor: "bg-green-50",
+        textColor: "text-green-600",
+        borderColor: "border-green-200"
+      },
+      canceled: {
+        text: "Canceled",
+        bgColor: "bg-red-50",
+        textColor: "text-red-600",
+        borderColor: "border-red-200"
+      },
+      rescheduled: {
+        text: "Rescheduled",
+        bgColor: "bg-orange-50",
+        textColor: "text-orange-600",
+        borderColor: "border-orange-200"
+      }
+    };
+
+    const config = statusConfig[status] || statusConfig.upcoming;
+
+    return (
+      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${config.bgColor} ${config.textColor} ${config.borderColor}`}>
+        {config.text}
+      </span>
+    );
+  };
+
+  const filteredMeetings = meetings.filter((meeting) => {
     const content = meeting.details
       .map(([, v]) => v)
       .join(" ")
@@ -109,6 +159,39 @@ export default function MeetingsDashboard() {
     } else {
       setShowCalendar(!showCalendar);
     }
+  };
+
+  // Cancel meeting handlers
+  const handleCancelClick = (meetingIndex) => {
+    setMeetingToCancel(meetingIndex);
+    setShowCancelPopup(true);
+  };
+
+  const handleCancelConfirm = () => {
+    // Update the meeting status to canceled instead of removing it
+    setMeetings(prev => prev.map((meeting, index) =>
+      index === meetingToCancel
+        ? { ...meeting, status: "canceled" }
+        : meeting
+    ));
+    setShowCancelPopup(false);
+    setShowSuccessPopup(true);
+  };
+
+  const handleReschedule = (meetingIndex) => {
+    // Update the meeting status to rescheduled
+    setMeetings(prev => prev.map((meeting, index) =>
+      index === meetingIndex
+        ? { ...meeting, status: "rescheduled" }
+        : meeting
+    ));
+    navigate("/invite-form");
+  };
+
+  const handlePopupClose = () => {
+    setShowCancelPopup(false);
+    setShowSuccessPopup(false);
+    setMeetingToCancel(null);
   };
 
   return (
@@ -178,7 +261,12 @@ export default function MeetingsDashboard() {
               className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 "
               style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
             >
-              <h3 className="text-primary font-medium mb-3">{meeting.title}</h3>
+              {/* Header with title and status badge */}
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-primary font-medium">{meeting.title}</h3>
+                {getStatusBadge(meeting.status)}
+              </div>
+
               <div className="space-y-2 mb-4">
                 {meeting.details.map(([label, value], idx) => (
                   <div className="flex justify-between" key={idx}>
@@ -189,16 +277,8 @@ export default function MeetingsDashboard() {
                   </div>
                 ))}
               </div>
-              {meeting.type === "group" && (
-                <div className="flex gap-3">
-                  <button className="flex-1 py-2 px-4 bg-green-50 text-green-600 rounded-[8px] text-sm font-medium border border-green-200 hover:bg-green-100">
-                    Reschedule
-                  </button>
-                  <button className="flex-1 py-2 px-4 bg-red-50 text-red-600 rounded-[8px] text-sm font-medium border border-red-200 hover:bg-red-100">
-                    Cancel
-                  </button>
-                </div>
-              )}
+
+
             </div>
           ))}
         </div>
@@ -210,6 +290,14 @@ export default function MeetingsDashboard() {
             <RiAddLine className="text-lg" />
           </button>
         </div>
+
+        {/* Cancel Meeting Popup */}
+        <CancelMeetingPopup
+          isOpen={showCancelPopup || showSuccessPopup}
+          onClose={handlePopupClose}
+          onConfirm={handleCancelConfirm}
+          showSuccess={showSuccessPopup}
+        />
       </div>
     </div>
   );

@@ -153,7 +153,7 @@ export default function MainDashboard() {
                 style={{
                   opacity: 1,
                 }}
-                onClick={() => handleRedirect("previous")}
+                onClick={() => navigate("/previous-meetings")}
               >
                 <div className="flex items-center justify-between mb-2">
                   <ClockFading className="w-6 h-6 text-gray-600" />
@@ -288,17 +288,17 @@ export default function MainDashboard() {
         {/* Attendance Section */}
         <div className="pt-4 w-full">
           <div className="w-full">
-          <div className="bg-gray-50 rounded-2xl p-6 w-full">
+            <div className="bg-gray-50 rounded-2xl p-6 w-full">
 
-            <div className="flex items-center justify-between w-full">
-              <h2 className="text-lg font-semibold text-gray-800 font-poppins">
-                Attendance
-              </h2>
+              <div className="flex items-center justify-between w-full">
+                <h2 className="text-lg font-semibold text-gray-800 font-poppins">
+                  Attendance
+                </h2>
+              </div>
+
+              <ChartComponent />
             </div>
 
-            <ChartComponent />
-          </div>
-          
 
             <div className="grid grid-cols-2 gap-4 text-center pt-2">
               <div>
@@ -319,7 +319,7 @@ export default function MainDashboard() {
               </div>
             </div>
             <button
-              onClick={()=>navigate("/attendance-overview?filter=total")}
+              onClick={() => navigate("/attendance-overview?filter=total")}
               className="w-full text-white py-3 rounded-2xl font-medium mt-4 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary"
             >
               <span>View Students</span>
