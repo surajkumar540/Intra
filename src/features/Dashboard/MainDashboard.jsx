@@ -7,7 +7,7 @@ import OverviewSection from "./components/OverviewSection";
 import AttendanceSection from "./components/AttendanceSection";
 import AttendanceInterface from "../../pages/dashboard/AttendanceInterface";
 import entraLogo from "../../assets/offical/entraLogo.png";
-import Stickyfooter from "../../components/Footer/Stickyfooter";
+import StickyFooter from "../../components/Footer/StickyFooter";
 
 export default function MainDashboard() {
   const navigate = useNavigate();
@@ -160,7 +160,7 @@ export default function MainDashboard() {
         <AttendanceInterface />
 
         {/* Sticky Footer */}
-        <Stickyfooter
+        <StickyFooter
           onTabChange={handleFooterTabChange}
           activeTab={activeTab}
         />
