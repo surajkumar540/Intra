@@ -298,7 +298,7 @@ Meeting Management System`;
               className="w-[345px] h-[50px] rounded-[16px] px-[10px] py-[10px] text-white font-semibold text-lg mt-8 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
               style={{ backgroundColor: primaryColor }}
             >
-              Create Invites
+              Create Invite
             </button>
           </div>
         </div>
