@@ -176,7 +176,7 @@ export default function MeetingsDashboard() {
         </div>
 
         {/* Search Bar */}
-        <div className="p-4">
+        <div className="p-4 ">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <RiSearchLine className="text-gray-400 text-sm" />
@@ -231,7 +231,7 @@ export default function MeetingsDashboard() {
         </div>
 
         {/* Create Invite Button */}
-        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-white border-t border-gray-100">
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-white border-t border-gray-100 px-10">
           <Button
             onClick={() => navigate("/invite-form")}
             className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary"

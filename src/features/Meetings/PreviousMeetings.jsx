@@ -256,11 +256,15 @@ export default function MeetingsDashboard() {
         </div>
 
         {/* Create Invite Button */}
-        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-white border-t border-gray-100">
-          <button className="w-full bg-primary hover:bg-secondary text-white py-3 px-6 rounded-[8px] font-medium flex items-center justify-center gap-2 shadow-lg">
-            <span>Create Invite</span>
-            <RiAddLine className="text-lg" />
-          </button>
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md p-4 bg-white border-t border-gray-100 px-10">
+          <Button
+            onClick={() => navigate("/invite-form")}
+            className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary"
+            icon={<Plus className="w-5 h-5" />}
+            iconPosition="right"
+          >
+            Create Invite
+          </Button>
         </div>
 
         {/* Cancel Meeting Popup */}

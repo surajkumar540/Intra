@@ -4,6 +4,7 @@ import { GoEyeClosed } from "react-icons/go";
 import { IoMailOutline } from "react-icons/io5";
 import entraLogo from "../../assets/offical/entraBlackLogo.png";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/UI/Button";
 
 const Login = ({ setAuth }) => {
   const navigate = useNavigate();
@@ -82,11 +83,10 @@ const Login = ({ setAuth }) => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full px-4 py-3 text-[16px] leading-[100%] text-[#989898] font-normal font-poppins pr-12 bg-[#F3F3F3] border-2 border-[#E1E1E1] rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${
-                    errors.email
-                      ? "border-red-300 focus:border-red-500"
-                      : "border-gray-200 focus:border-primary"
-                  }`}
+                  className={`w-full px-4 py-3 text-[16px] leading-[100%] text-[#989898] font-normal font-poppins pr-12 bg-[#F3F3F3] border-2 border-[#E1E1E1] rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.email
+                    ? "border-red-300 focus:border-red-500"
+                    : "border-gray-200 focus:border-primary"
+                    }`}
                   placeholder="Enter your email"
                 />
 
@@ -106,11 +106,10 @@ const Login = ({ setAuth }) => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${
-                    errors.password
-                      ? "border-red-300 focus:border-red-500"
-                      : "border-gray-200 focus:border-primary"
-                  }`}
+                  className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.password
+                    ? "border-red-300 focus:border-red-500"
+                    : "border-gray-200 focus:border-primary"
+                    }`}
                   placeholder="Password"
                 />
                 <button
@@ -162,22 +161,24 @@ const Login = ({ setAuth }) => {
             </div>
 
             {/* Login Button */}
-            <button
+
+            <Button
               onClick={handleLogin}
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-medium text-[24px] leading-[100%] font-poppins py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? (
-                <div className="flex items-center  justify-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  <span className=" leading-[100%] font-poppins font-medium">
-                    Signing in...
-                  </span>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span className="text-sm font-medium">Logging in...</span>
                 </div>
               ) : (
-                <div className="text-[20px]">Log In</div>
+                <>
+                  <span>Login</span>
+                </>
               )}
-            </button>
+            </Button>
+
           </div>
         </div>
       </div>
