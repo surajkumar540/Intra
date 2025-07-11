@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WelcomeFlow from "../Onboarding/WelcomeFlow";
 import smartImg from "../../assets/unofficial/smart-attendance.png";
 import parentImg from "../../assets/unofficial/parent-communication.png";
 import reportImg from "../../assets/unofficial/student-reports.png";
 import { useNavigate } from "react-router-dom";
+
 const slides = [
   {
     image: smartImg,
@@ -25,8 +26,32 @@ const slides = [
 
 const WelcomeScreen = () => {
   const [index, setIndex] = useState(0);
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
   const navigate = useNavigate();
+
+  // Auto-slide functionality
+  useEffect(() => {
+    if (!isAutoSliding) return;
+
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => {
+        if (prevIndex < slides.length - 1) {
+          return prevIndex + 1;
+        } else {
+          // Stop auto-sliding when we reach the last slide
+          setIsAutoSliding(false);
+          return prevIndex;
+        }
+      });
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoSliding]);
+
   const handleNext = () => {
+    // Stop auto-sliding when user clicks next
+    setIsAutoSliding(false);
+    
     if (index < slides.length - 1) {
       setIndex(index + 1);
     } else {
