@@ -5,6 +5,7 @@ import { GoEyeClosed } from "react-icons/go";
 import { AiFillEye } from "react-icons/ai";
 import PasswordUpdateSuccess from "../Auth/PasswordUpdateSuccess";
 import Button from "../../components/UI/Button";
+import { IoIosArrowBack } from "react-icons/io";
 
 function SetNewPassword() {
   const navigate = useNavigate();
@@ -136,20 +137,20 @@ function SetNewPassword() {
       <div className="w-full max-w-sm">
         {/* Header - Fixed positioning */}
         <button
-          className="w-10 h-10 flex items-center justify-center bg-gray-200 text-black rounded-full hover:bg-gray-300 transition-colors duration-200 active:scale-95"
-          onClick={() => navigate("/forgot-password")}
-          disabled={isLoading}
+          className="w-10 h-10 flex items-center justify-center bg-[#ECECEC] text-black rounded-full hover:bg-gray-200 transition"
+          onClick={() => navigate("/login")}
         >
-          <ArrowLeft size={20} />
+          <IoIosArrowBack size={20} />
         </button>
 
         <div className="flex flex-col gap-4 mt-12">
-          <p className="font-medium text-lg leading-tight text-gray-900">
+          <p className="font-poppins font-normal text-lg leading-none text-[#333333]">
+
             Set new password
           </p>
 
           <p className="font-poppins font-normal text-[14px] leading-[14px] tracking-[0px] text-[#989898]">
-            Create a new password. Ensure it differs from previous ones for
+            Create a new password. Ensure it differs <br /> from previous ones for
             security
           </p>
         </div>
@@ -167,7 +168,8 @@ function SetNewPassword() {
 
               {/* Password Input */}
               <div className="space-y-2">
-                <label className="font-openSans font-semibold text-[16px] leading-[19.1px] tracking-[-0.48px]">
+                <label className="font-poppins font-normal text-sm leading-none text-[#989898]">
+
                   New Password
                 </label>
                 <div className="relative">
@@ -177,8 +179,8 @@ function SetNewPassword() {
                     onChange={handlePasswordChange}
                     disabled={isLoading}
                     className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.password
-                        ? "border-red-300 focus:border-red-500"
-                        : "border-gray-200 focus:border-primary"
+                      ? "border-red-300 focus:border-red-500"
+                      : "border-gray-200 focus:border-primary"
                       } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     placeholder="Enter new password"
                   />
@@ -212,8 +214,8 @@ function SetNewPassword() {
                     onChange={handleConfirmPasswordChange}
                     disabled={isLoading}
                     className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.confirmPassword
-                        ? "border-red-300 focus:border-red-500"
-                        : "border-gray-200 focus:border-primary"
+                      ? "border-red-300 focus:border-red-500"
+                      : "border-gray-200 focus:border-primary"
                       } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     placeholder="Confirm new password"
                   />
@@ -248,8 +250,8 @@ function SetNewPassword() {
                     ></div>
                     <span
                       className={`text-sm ${password.length >= 8
-                          ? "text-green-600"
-                          : "text-gray-500"
+                        ? "text-green-600"
+                        : "text-gray-500"
                         }`}
                     >
                       At least 8 characters
@@ -258,14 +260,14 @@ function SetNewPassword() {
                   <div className="flex items-center gap-2">
                     <div
                       className={`w-2 h-2 rounded-full ${/(?=.*[a-z])/.test(password)
-                          ? "bg-green-500"
-                          : "bg-gray-300"
+                        ? "bg-green-500"
+                        : "bg-gray-300"
                         }`}
                     ></div>
                     <span
                       className={`text-sm ${/(?=.*[a-z])/.test(password)
-                          ? "text-green-600"
-                          : "text-gray-500"
+                        ? "text-green-600"
+                        : "text-gray-500"
                         }`}
                     >
                       One lowercase letter
@@ -274,14 +276,14 @@ function SetNewPassword() {
                   <div className="flex items-center gap-2">
                     <div
                       className={`w-2 h-2 rounded-full ${/(?=.*[A-Z])/.test(password)
-                          ? "bg-green-500"
-                          : "bg-gray-300"
+                        ? "bg-green-500"
+                        : "bg-gray-300"
                         }`}
                     ></div>
                     <span
                       className={`text-sm ${/(?=.*[A-Z])/.test(password)
-                          ? "text-green-600"
-                          : "text-gray-500"
+                        ? "text-green-600"
+                        : "text-gray-500"
                         }`}
                     >
                       One uppercase letter
@@ -290,14 +292,14 @@ function SetNewPassword() {
                   <div className="flex items-center gap-2">
                     <div
                       className={`w-2 h-2 rounded-full ${/(?=.*\d)/.test(password)
-                          ? "bg-green-500"
-                          : "bg-gray-300"
+                        ? "bg-green-500"
+                        : "bg-gray-300"
                         }`}
                     ></div>
                     <span
                       className={`text-sm ${/(?=.*\d)/.test(password)
-                          ? "text-green-600"
-                          : "text-gray-500"
+                        ? "text-green-600"
+                        : "text-gray-500"
                         }`}
                     >
                       One number
@@ -306,14 +308,14 @@ function SetNewPassword() {
                   <div className="flex items-center gap-2">
                     <div
                       className={`w-2 h-2 rounded-full ${/(?=.*[@$!%*?&])/.test(password)
-                          ? "bg-green-500"
-                          : "bg-gray-300"
+                        ? "bg-green-500"
+                        : "bg-gray-300"
                         }`}
                     ></div>
                     <span
                       className={`text-sm ${/(?=.*[@$!%*?&])/.test(password)
-                          ? "text-green-600"
-                          : "text-gray-500"
+                        ? "text-green-600"
+                        : "text-gray-500"
                         }`}
                     >
                       One special character

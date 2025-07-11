@@ -40,7 +40,7 @@ const VerifyOtp = () => {
   return (
     <div className="min-h-screen flex justify-center items-center px-4">
       <div className="max-w-sm w-full space-y-6">
-        <h1 className="text-xl font-semibold text-center">Enter OTP</h1>
+      
 
         <OtpField otp={otp} setOtp={setOtp} email={email} />
 

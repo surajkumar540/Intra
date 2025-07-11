@@ -10,17 +10,17 @@ const slides = [
     image: smartImg,
     title: "Smart Attendance  Tracking",
     description:
-      "Easily mark and manage student attendance <br>in just a few taps.",
+      "Easily mark and manage student attendance in just a few taps.",
   },
   {
     image: parentImg,
-    title: "Seamless  Parent Communication",
-    description: "Instantly connect with parents <br>via messages and alerts.",
+    title: "Seamless Parent Communication",
+    description: "Instantly connect with parents via messages and alerts.",
   },
   {
     image: reportImg,
-    title: "Student Reports  at  Your Fingertips",
-    description: "Access real-time student performance <br>anytime, anywhere.",
+    title: "Student Reports at  Your Fingertips",
+    description: "Access real-time student performance anytime, anywhere.",
   },
 ];
 
@@ -51,7 +51,7 @@ const WelcomeScreen = () => {
   const handleNext = () => {
     // Stop auto-sliding when user clicks next
     setIsAutoSliding(false);
-    
+
     if (index < slides.length - 1) {
       setIndex(index + 1);
     } else {

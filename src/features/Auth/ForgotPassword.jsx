@@ -68,11 +68,11 @@ const ForgetPassword = () => {
         </button>
 
         <div className="flex flex-col gap-4 mt-12">
-          <p className="font-poppins font-normal text-[18px] leading-[19.1px] tracking-[0px] antialiased text-[#1E1E1E]">
+          <p className="font-poppins font-normal text-lg leading-none text-[#333333]">
             Forgot password
           </p>
 
-          <p className="font-poppins font-normal text-[14px] leading-[14px] tracking-[0px] text-[#989898]">
+          <p className="font-poppins font-normal text-sm leading-none text-[#989898]">
             Please enter your email to reset the password
           </p>
         </div>
@@ -89,8 +89,8 @@ const ForgetPassword = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={`w-full px-4 py-3 pr-12 mb-6 border-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${errors.email
-                    ? "border-red-300 focus:border-red-500"
-                    : "border-gray-200 focus:border-primary"
+                  ? "border-red-300 focus:border-red-500"
+                  : "border-gray-200 focus:border-primary"
                   }`}
                 placeholder="Enter your email"
                 disabled={isLoading}

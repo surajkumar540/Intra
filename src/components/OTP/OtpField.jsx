@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 function OtpField() {
   const navigate = useNavigate();
@@ -177,23 +178,22 @@ function OtpField() {
   const isComplete = otp.every((digit) => digit !== "");
 
   return (
-    <div className="min-h-screen bg-white flex justify-center px-4 py-8">
+    <div className="min-h-screen bg-white flex justify-center py-8">
       <div className="w-full max-w-sm">
         {/* Header - Fixed positioning */}
         <button
-          className="w-10 h-10 flex items-center justify-center bg-gray-200 text-black rounded-full hover:bg-gray-300 transition-colors duration-200 active:scale-95"
+          className="w-10 h-10 flex items-center justify-center bg-[#ECECEC] text-black rounded-full hover:bg-gray-200 transition"
           onClick={() => navigate("/forgot-password")}
-          disabled={isLoading}
         >
-          <ArrowLeft size={20} />
+          <IoIosArrowBack size={20} />
         </button>
 
         <div className="flex flex-col gap-4 mt-12">
-          <p className="font-medium text-lg leading-tight text-gray-900">
+          <p className="font-poppins font-normal text-lg leading-none text-[#333333]">
             Check your email
           </p>
 
-          <p className="font-poppins font-normal text-[14px] leading-[14px] tracking-[0px] text-[#989898]">
+          <p className="font-poppins font-normal text-[14px]  tracking-[0px] text-[#989898]">
             We sent an OTP to {email} <br /> Enter the 5 digit code mentioned in
             the email
           </p>
@@ -217,11 +217,10 @@ function OtpField() {
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
                     disabled={isLoading}
-                    className={`w-14 h-14 text-center text-2xl font-semibold border-2 rounded-lg focus:outline-none transition-colors duration-200 focus:ring-0 focus:ring-offset-0 ${
-                      error
-                        ? "border-red-300 focus:border-red-500"
-                        : "border-gray-200 focus:border-primary hover:border-gray-300"
-                    } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                    className={`w-14 h-14 text-center text-2xl font-semibold border-2 rounded-lg focus:outline-none transition-colors duration-200 focus:ring-0 focus:ring-offset-0 ${error
+                      ? "border-red-300 focus:border-red-500"
+                      : "border-gray-200 focus:border-primary hover:border-gray-300"
+                      } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     style={{
                       WebkitAppearance: "none",
                       MozAppearance: "textfield",
@@ -255,7 +254,7 @@ function OtpField() {
 
               {/* Resend Link - Stable positioning */}
               <div className="text-center">
-                <span className="text-gray-500">
+                <span className="font-poppins font-normal text-[14px]  tracking-[0px] text-[#989898]">
                   Haven't got the email yet?{" "}
                 </span>
                 <button

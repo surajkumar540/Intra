@@ -7,11 +7,13 @@ import OverviewSection from "./components/OverviewSection";
 import AttendanceSection from "./components/AttendanceSection";
 import AttendanceInterface from "../../pages/dashboard/AttendanceInterface";
 import entraLogo from "../../assets/offical/entraLogo.png";
+import Stickyfooter from "../../components/Footer/Stickyfooter";
 
 export default function MainDashboard() {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("2024-01-15");
   const [showCalendar, setShowCalendar] = useState(false);
+  const [activeTab, setActiveTab] = useState("home"); // Add state for active tab
 
   // Mock data for dynamic content
   const [dashboardData, setDashboardData] = useState({
@@ -81,6 +83,29 @@ export default function MainDashboard() {
     navigate("/attendance-overview?filter=total");
   };
 
+  // Footer navigation handler
+  const handleFooterTabChange = (tab) => {
+    setActiveTab(tab);
+    
+    // Handle navigation based on tab
+    switch (tab) {
+      case 'home':
+        navigate('/dashboard');
+        break;
+      case 'search':
+        navigate('/search');
+        break;
+      case 'edit':
+        navigate('/edit');
+        break;
+      case 'report':
+        navigate('/reports');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="w-full min-w-sm sm:max-w-sm bg-white min-h-screen">
@@ -107,8 +132,8 @@ export default function MainDashboard() {
           style={{ height: "auto" }}
         />
 
-        {/* Main Content */}
-        <div className="px-4 pt-4 flex flex-col justify-center items-center bg-">
+        {/* Main Content - Add bottom padding to prevent content from being hidden behind footer */}
+        <div className="px-4 pt-4 flex flex-col justify-center items-center bg- pb-20">
           <AppointmentsSection
             upcomingMeetings={dashboardData.upcomingMeetings}
             previousMeetings={dashboardData.previousMeetings}
@@ -133,6 +158,12 @@ export default function MainDashboard() {
         />
 
         <AttendanceInterface />
+
+        {/* Sticky Footer */}
+        <Stickyfooter
+          onTabChange={handleFooterTabChange}
+          activeTab={activeTab}
+        />
       </div>
     </div>
   );
