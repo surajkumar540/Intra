@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { GoEyeClosed } from "react-icons/go";
 import { AiFillEye } from "react-icons/ai";
 import PasswordUpdateSuccess from "../Auth/PasswordUpdateSuccess";
+import Button from "../../components/UI/Button";
 
 function SetNewPassword() {
   const navigate = useNavigate();
@@ -175,11 +176,10 @@ function SetNewPassword() {
                     value={password}
                     onChange={handlePasswordChange}
                     disabled={isLoading}
-                    className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${
-                      errors.password
+                    className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.password
                         ? "border-red-300 focus:border-red-500"
                         : "border-gray-200 focus:border-primary"
-                    } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                      } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     placeholder="Enter new password"
                   />
                   <button
@@ -211,11 +211,10 @@ function SetNewPassword() {
                     value={confirmPassword}
                     onChange={handleConfirmPasswordChange}
                     disabled={isLoading}
-                    className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${
-                      errors.confirmPassword
+                    className={`w-full text-primary px-4 py-3 pr-12 bg-[#F3F3F3] border-2 rounded-xl focus:outline-none focus:ring-0 transition-all duration-200 ${errors.confirmPassword
                         ? "border-red-300 focus:border-red-500"
                         : "border-gray-200 focus:border-primary"
-                    } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                      } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     placeholder="Confirm new password"
                   />
                   <button
@@ -244,88 +243,78 @@ function SetNewPassword() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-2 h-2 rounded-full ${
-                        password.length >= 8 ? "bg-green-500" : "bg-gray-300"
-                      }`}
+                      className={`w-2 h-2 rounded-full ${password.length >= 8 ? "bg-green-500" : "bg-gray-300"
+                        }`}
                     ></div>
                     <span
-                      className={`text-sm ${
-                        password.length >= 8
+                      className={`text-sm ${password.length >= 8
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       At least 8 characters
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-2 h-2 rounded-full ${
-                        /(?=.*[a-z])/.test(password)
+                      className={`w-2 h-2 rounded-full ${/(?=.*[a-z])/.test(password)
                           ? "bg-green-500"
                           : "bg-gray-300"
-                      }`}
+                        }`}
                     ></div>
                     <span
-                      className={`text-sm ${
-                        /(?=.*[a-z])/.test(password)
+                      className={`text-sm ${/(?=.*[a-z])/.test(password)
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       One lowercase letter
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-2 h-2 rounded-full ${
-                        /(?=.*[A-Z])/.test(password)
+                      className={`w-2 h-2 rounded-full ${/(?=.*[A-Z])/.test(password)
                           ? "bg-green-500"
                           : "bg-gray-300"
-                      }`}
+                        }`}
                     ></div>
                     <span
-                      className={`text-sm ${
-                        /(?=.*[A-Z])/.test(password)
+                      className={`text-sm ${/(?=.*[A-Z])/.test(password)
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       One uppercase letter
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-2 h-2 rounded-full ${
-                        /(?=.*\d)/.test(password)
+                      className={`w-2 h-2 rounded-full ${/(?=.*\d)/.test(password)
                           ? "bg-green-500"
                           : "bg-gray-300"
-                      }`}
+                        }`}
                     ></div>
                     <span
-                      className={`text-sm ${
-                        /(?=.*\d)/.test(password)
+                      className={`text-sm ${/(?=.*\d)/.test(password)
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       One number
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div
-                      className={`w-2 h-2 rounded-full ${
-                        /(?=.*[@$!%*?&])/.test(password)
+                      className={`w-2 h-2 rounded-full ${/(?=.*[@$!%*?&])/.test(password)
                           ? "bg-green-500"
                           : "bg-gray-300"
-                      }`}
+                        }`}
                     ></div>
                     <span
-                      className={`text-sm ${
-                        /(?=.*[@$!%*?&])/.test(password)
+                      className={`text-sm ${/(?=.*[@$!%*?&])/.test(password)
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}
+                        }`}
                     >
                       One special character
                     </span>
@@ -334,21 +323,22 @@ function SetNewPassword() {
               </div>
 
               {/* Reset Password Button */}
-              <button
+              <Button
                 onClick={handleResetPassword}
                 disabled={isLoading || !password || !confirmPassword}
-                className="w-full bg-primary disabled:bg-primary/40 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                style={{
-                  boxSizing: "border-box",
-                  minHeight: "48px",
-                }}
+                className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {isLoading
-                  ? "Updating Password..."
-                  : updated
-                  ? "Password Updated"
-                  : "Update Password"}
-              </button>
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span className="text-sm font-medium">Verifying...</span>
+                  </div>
+                ) : (
+                  <>
+                    <span>Update Password</span>
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         </div>

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/UI/Button";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-  
+
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +26,7 @@ const ForgetPassword = () => {
     if (!validateEmail()) return;
 
     setIsLoading(true);
-    
+
     try {
       // Here you would typically make an API call to send the OTP
       // Example API call (replace with your actual endpoint):
@@ -42,10 +43,10 @@ const ForgetPassword = () => {
         throw new Error('Failed to send OTP');
       }
       */
-      
+
       // For demonstration, we'll simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Navigate to verification page with email in state
       navigate("/otp-verification", { state: { email } });
     } catch (error) {
@@ -87,11 +88,10 @@ const ForgetPassword = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full px-4 py-3 pr-12 mb-6 border-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${
-                  errors.email
+                className={`w-full px-4 py-3 pr-12 mb-6 border-[#F3F3F3] border-2 rounded-xl focus:outline-none transition-all duration-200 ${errors.email
                     ? "border-red-300 focus:border-red-500"
                     : "border-gray-200 focus:border-primary"
-                }`}
+                  }`}
                 placeholder="Enter your email"
                 disabled={isLoading}
               />
@@ -99,13 +99,23 @@ const ForgetPassword = () => {
             {errors.email && (
               <p className="text-sm text-red-500 mt-1">{errors.email}</p>
             )}
-            <button
-              type="submit"
+
+            <Button
+              onClick={handleReset}
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary/90 disabled:bg-primary/40 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200"
+              className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Sending..." : "Reset Password"}
-            </button>
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span className="text-sm font-medium">Sending...</span>
+                </div>
+              ) : (
+                <>
+                  <span>Reset Password</span>
+                </>
+              )}
+            </Button>
           </div>
         </form>
       </div>

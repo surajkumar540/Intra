@@ -2,6 +2,7 @@ import React from 'react';
 import { BadgeCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import Button from '../../components/UI/Button';
 export default function PasswordUpdateSuccess() {
   const navigate = useNavigate();
 
@@ -32,9 +33,13 @@ export default function PasswordUpdateSuccess() {
 
 
         {/* Continue Button */}
-        <button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200" onClick={() => navigate("/login")}>
-          Log In
-        </button>
+
+        <Button
+          onClick={() => navigate("/login")}
+          className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          <span>Log In</span>
+        </Button>
       </div>
     </div>
   );

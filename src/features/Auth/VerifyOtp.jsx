@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OtpField from "../../components/OTP/OtpField";
+import Button from "../../components/UI/Button";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -43,15 +44,22 @@ const VerifyOtp = () => {
 
         <OtpField otp={otp} setOtp={setOtp} email={email} />
 
-        <button
-          onClick={handleVerify}
-          disabled={!isComplete}
-          className={`w-full py-3 rounded-xl font-semibold text-white transition-all ${
-            isComplete ? "bg-primary" : "bg-primary/40 cursor-not-allowed"
-          }`}
-        >
-          Verify Code
-        </button>
+        <Button
+              onClick={handleVerify}
+              disabled={!isComplete}
+              className="w-full text-white py-3 rounded-2xl font-medium mt-6 flex items-center justify-center space-x-2 hover:opacity-90 bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {!isComplete ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span className="text-sm font-medium">Verifying...</span>
+                </div>
+              ) : (
+                <>
+                  <span>Verify Code</span>
+                </>
+              )}
+            </Button>
       </div>
     </div>
   );
