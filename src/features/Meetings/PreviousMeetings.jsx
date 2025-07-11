@@ -4,7 +4,7 @@ import { RiSearchLine, RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import NavbarHeader from "../../components/Navbar/NavbarHeader";
 import CalendarComponent from "../../components/Calendar/CalendarComponent";
-import CancelMeetingPopup from "../../components/modals/CancelMeetingPopup";
+import CancelMeetingPopup from "../../components/Popup/CancelMeetingPopup";
 import SearchInput from "../../components/UI/SearchInput";
 import Button from "../../components/UI/Button";
 
